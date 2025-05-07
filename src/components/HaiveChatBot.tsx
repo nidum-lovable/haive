@@ -1,87 +1,100 @@
-
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 const HaiVEChatbot = () => {
+  // Keep track of timeouts to clear them properly
+  const timeoutsRef = useRef<number[]>([]);
+  
   useEffect(() => {
-    // Add the HaiVE script to the page
-    const addHaiveScript = () => {
-      // Check if script already exists
-      if (!document.getElementById('haive-script')) {
-        const script = document.createElement('script')
-        script.id = 'haive-script'
-        script.src = 'https://widget.haive.tech/widget.iife.js'
-        script.async = true
-        script.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_95e6c2e7-2909-46cb-bd02-48109a7ae785')
-        script.setAttribute('data-phone_number', '17252390568')
-        script.setAttribute('data-assistant_name', 'Sara')
-        script.setAttribute('data-container', 'haive-widget-container')
-        
-        // Append to the container
-        const container = document.getElementById('haive-widget-container')
-        if (container) {
-          container.appendChild(script)
+    // Clean function to ensure the widget container has proper styles
+    const setupWidgetContainer = () => {
+      const container = document.getElementById('haive-widget-container');
+      if (!container) return;
+      
+      // Ensure container doesn't block interactions with the page
+      container.style.pointerEvents = 'none';
+      
+      // Find all direct children and make them clickable
+      Array.from(container.children).forEach(child => {
+        if (child instanceof HTMLElement) {
+          child.style.pointerEvents = 'auto';
         }
-      }
-    }
-
-    // Apply pointer events styling to ensure widget works while not blocking page interaction
-    const applyWidgetStyles = () => {
-      // 1. Set container to not capture pointer events
-      const container = document.getElementById('haive-widget-container')
-      if (container) {
-        container.style.pointerEvents = 'none'
-      }
+      });
       
-      // 2. Set body and main content to capture pointer events
-      document.body.style.pointerEvents = 'auto'
-      const rootElement = document.getElementById('root')
+      // Ensure the main page elements can receive interactions
+      document.body.style.pointerEvents = 'auto';
+      const rootElement = document.getElementById('root');
       if (rootElement) {
-        rootElement.style.pointerEvents = 'auto'
+        rootElement.style.pointerEvents = 'auto';
       }
+    };
+    
+    // Add HaiVE widget script if it doesn't exist
+    const addHaiveScript = () => {
+      if (document.getElementById('haive-script')) return;
       
-      // 3. Make all direct children of widget container clickable
+      const script = document.createElement('script');
+      script.id = 'haive-script';
+      script.src = 'https://widget.haive.tech/widget.iife.js';
+      script.async = true;
+      script.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_95e6c2e7-2909-46cb-bd02-48109a7ae785');
+      script.setAttribute('data-phone_number', '17252390568');
+      script.setAttribute('data-assistant_name', 'Sara');
+      script.setAttribute('data-container', 'haive-widget-container');
+      
+      const container = document.getElementById('haive-widget-container');
       if (container) {
-        Array.from(container.children).forEach(child => {
-          if (child instanceof HTMLElement) {
-            child.style.pointerEvents = 'auto'
-          }
-        })
+        container.appendChild(script);
       }
-    }
+    };
     
-    // Setup initial state
-    addHaiveScript()
+    // Initial setup
+    addHaiveScript();
+    setupWidgetContainer();
     
-    // Apply styles initially and after a delay (to catch dynamically added elements)
-    applyWidgetStyles()
-    const initialStyleTimeout = setTimeout(applyWidgetStyles, 1000)
-    const secondStyleTimeout = setTimeout(applyWidgetStyles, 2500)
+    // Apply styles with multiple delays to catch async widget loading
+    const delays = [100, 500, 1000, 2000, 3000];
+    delays.forEach(delay => {
+      const timeoutId = setTimeout(setupWidgetContainer, delay);
+      timeoutsRef.current.push(timeoutId);
+    });
     
-    // Setup mutation observer to watch for changes in the widget container
+    // Setup mutation observer with strong configuration
     const observer = new MutationObserver(() => {
-      applyWidgetStyles()
-    })
+      setupWidgetContainer();
+      
+      // Re-apply after slight delay to catch any nested changes
+      const timeoutId = setTimeout(setupWidgetContainer, 100);
+      timeoutsRef.current.push(timeoutId);
+    });
     
-    // Start observing the widget container for changes
-    const container = document.getElementById('haive-widget-container')
+    // Watch for container changes with comprehensive config
+    const container = document.getElementById('haive-widget-container');
     if (container) {
-      observer.observe(container, { 
-        childList: true, 
-        subtree: true, 
+      observer.observe(container, {
+        childList: true,
+        subtree: true,
         attributes: true,
-        attributeFilter: ['style', 'class']
-      })
+        attributeFilter: ['style', 'class'],
+        characterData: true
+      });
     }
+    
+    // Watch for body changes that might affect interaction
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true
+    });
     
     // Cleanup function
     return () => {
-      observer.disconnect()
-      clearTimeout(initialStyleTimeout)
-      clearTimeout(secondStyleTimeout)
-    }
-  }, [])
+      observer.disconnect();
+      timeoutsRef.current.forEach(id => clearTimeout(id));
+      timeoutsRef.current = [];
+    };
+  }, []);
 
-  return null
-}
+  return null;
+};
 
-export default HaiVEChatbot
+export default HaiVEChatbot;
