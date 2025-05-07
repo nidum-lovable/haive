@@ -4,7 +4,7 @@ import ButtonCTA from './ui/ButtonCTA';
 
 const Footer = () => {
   return (
-    <footer className="py-10 bg-haive-dark-purple relative border-t border-gray-800">
+    <footer className="py-10 bg-haive-dark relative">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
           <div>
@@ -18,7 +18,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row gap-4">
             <a href="#" className="text-gray-400 hover:text-haive-teal transition text-sm">Terms</a>
             <a href="#" className="text-gray-400 hover:text-haive-teal transition text-sm">Privacy</a>
-            <a href="#contact" className="text-gray-400 hover:text-haive-teal transition text-sm">Contact</a>
+            <a href="#" className="text-gray-400 hover:text-haive-teal transition text-sm">Contact</a>
           </div>
         </div>
         
