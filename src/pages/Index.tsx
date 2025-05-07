@@ -6,6 +6,7 @@ import HowItWorksSection from '@/components/HowItWorksSection';
 import IntegrationsSection from '@/components/IntegrationsSection';
 import PricingSection from '@/components/PricingSection';
 import WhyHaiveSection from '@/components/WhyHaiveSection';
+import WhyOnPremiseAISection from '@/components/WhyOnPremiseAISection';
 import TechBadgesSection from '@/components/TechBadgesSection';
 import Footer from '@/components/Footer';
 
@@ -34,6 +35,7 @@ const Index = () => {
         <IntegrationsSection />
         <PricingSection />
         <WhyHaiveSection />
+        <WhyOnPremiseAISection />
         <TechBadgesSection />
       </main>
       <Footer />
