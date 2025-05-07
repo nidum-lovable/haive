@@ -10,6 +10,16 @@ const checkHaiveScriptLoaded = () => {
     const haiveScript = document.querySelector('script[src="https://widget.haive.tech/widget.iife.js"]');
     if (haiveScript) {
       console.log('HaiVE widget script is present in the DOM');
+      
+      // Check if widget is initialized in the DOM after a delay
+      setTimeout(() => {
+        const widgetElement = document.querySelector('[data-haive-widget]');
+        if (widgetElement) {
+          console.log('HaiVE widget is successfully initialized in the DOM');
+        } else {
+          console.warn('HaiVE widget script loaded but widget not initialized yet');
+        }
+      }, 5000); // Check after 5 seconds to give it time to initialize
     } else {
       console.warn('HaiVE widget script might not be properly loaded');
     }
