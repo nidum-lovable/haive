@@ -58,7 +58,7 @@
     position: relative;
     padding: 4rem 2rem;
     background-color: #000000; /* Set consistent black background for all sections */
-    z-index: 1; /* Lower z-index than widget */
+    z-index: 1;
   }
 
   .hexagon {
@@ -78,40 +78,6 @@
   }
 }
 
-/* Critical fix for HaiVE widget visibility */
-[data-haive-widget],
-div[data-haive-widget] {
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  z-index: 99999 !important; /* Ultra high z-index */
-  pointer-events: auto !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: none !important;
-  display: block !important;
-  max-height: none !important;
-  max-width: none !important;
-  overflow: visible !important;
-}
-
-/* Make sure widget iframe itself is visible */
-[data-haive-widget] iframe {
-  opacity: 1 !important;
-  visibility: visible !important;
-  z-index: 99999 !important;
-  display: block !important;
-  max-height: none !important;
-  max-width: none !important;
-  overflow: visible !important;
-}
-
-/* Add padding to the bottom of the page to prevent content from being hidden by widget */
-main {
-  padding-bottom: 120px;
-  position: relative;
-}
-
 /* Hero section adjustments */
 #hero {
   padding-bottom: 6rem;
@@ -119,15 +85,7 @@ main {
   z-index: 1;
 }
 
-/* Ensure sections don't accidentally cover the widget */
+/* Ensure sections don't accidentally cover content */
 section, div {
   position: relative;
-}
-
-/* Additional space at the end of the document */
-.end-spacer {
-  height: 150px;
-  width: 100%;
-  position: relative;
-  z-index: 1;
 }

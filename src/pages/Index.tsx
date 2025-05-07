@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import WhyOnPremiseAISection from '@/components/WhyOnPremiseAISection';
 import WhyHaiveSection from '@/components/WhyHaiveSection';
 import PricingSection from '@/components/PricingSection';
@@ -10,45 +10,6 @@ import IntegrationsSection from '@/components/IntegrationsSection';
 import FAQsSection from '@/components/FAQsSection';
 
 const Index = () => {
-  // Effect to ensure the widget is properly initialized and visible
-  useEffect(() => {
-    // First pass - initialize widget visibility
-    const initializeWidget = () => {
-      const widgetElement = document.querySelector('[data-haive-widget]');
-      if (widgetElement) {
-        // Force widget to be visible
-        widgetElement.setAttribute('style', 'opacity: 1 !important; visibility: visible !important; z-index: 99999 !important; position: fixed !important; bottom: 20px !important; right: 20px !important;');
-        
-        // Make sure the iframe is visible too
-        const iframe = widgetElement.querySelector('iframe');
-        if (iframe) {
-          iframe.setAttribute('style', 'opacity: 1 !important; visibility: visible !important; z-index: 99999 !important;');
-        }
-      }
-    };
-
-    // Initial setup
-    initializeWidget();
-
-    // Setup a periodic check to ensure widget stays visible
-    const widgetVisibilityCheck = setInterval(() => {
-      initializeWidget();
-    }, 2000);
-
-    // Also check on scroll events
-    const handleScroll = () => {
-      initializeWidget();
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup
-    return () => {
-      clearInterval(widgetVisibilityCheck);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
     <div className="min-h-screen bg-haive-dark text-white overflow-x-hidden">
       <main className="pt-8 relative">
@@ -81,9 +42,6 @@ const Index = () => {
         <IntegrationsSection />
         <FAQsSection />
         <ContactSection />
-        
-        {/* Extra space at the bottom to ensure nothing covers the widget */}
-        <div className="end-spacer"></div>
       </main>
     </div>
   );
