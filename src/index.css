@@ -108,16 +108,41 @@ main {
 
 
 /* Free the HaiVE widget container */
-#my-widget-container {
+#haive-widget-container {
   all: unset;
   position: fixed !important;
   bottom: 20px !important;
   right: 20px !important;
   z-index: 99999 !important;
   pointer-events: auto !important;
+  transition: opacity 0.3s ease;
+}
+
+/* When widget is closed/hidden */
+#haive-widget-container.hidden {
+  opacity: 0;
+  pointer-events: none !important;
 }
 
 body, #root {
   overflow: visible !important;
   position: static !important;
 }
+
+/* Chat toggle button animations */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 138, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 138, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 138, 0, 0);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
