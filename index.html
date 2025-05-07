@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,10 +21,57 @@
     <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png">
 
     <!-- Tailwind base, components, utilities injected via your index.css -->
+
+    <!-- HaiVE widget styling - more aggressive approach -->
+    <style>
+      /* Global styles to ensure widget stays on top */
+      body {
+        overflow-x: hidden;
+      }
+
+      /* Main content lower z-index */
+      #root, main, section, header, footer {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Widget styling - forcefully applied with !important */
+      .haive-fixed-container {
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 9999 !important;
+        width: auto !important;
+        height: auto !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+      }
+
+      .haive-chat-window {
+        position: fixed !important;
+        bottom: 90px !important;
+        right: 20px !important;
+        z-index: 9999 !important;
+        width: 350px !important;
+        max-width: 90vw !important;
+        max-height: 600px !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+      }
+
+      /* Any extra elements that might be interfering */
+      [class*="footer"], [class*="Header"], .sticky, .fixed {
+        z-index: 1 !important;
+      }
+    </style>
   </head>
 
   <body class="overflow-auto">
-    <!-- React’s root container -->
+    <!-- React's root container -->
     <div id="root"></div>
 
     <!-- 1) HaiVE widget loader — appended outside of #root -->
@@ -36,32 +84,85 @@
       class="haive-widget"
     ></script>
 
-    <!-- 2) Pinning shim — re-applies fixed positioning -->
+    <!-- 2) Enhanced widget positioning script -->
     <script>
-      function pinHaiVEWidget() {
+      // More robust approach to ensure consistent widget positioning
+      function fixHaiVEWidgetPosition() {
         // Find the loader script
         const loader = document.querySelector('script.haive-widget');
         if (!loader) return;
-
-        // The actual chat UI appears as the next sibling
-        const widgetRoot = loader.nextElementSibling;
-        [loader, widgetRoot].forEach(el => {
-          if (!el) return;
-          el.style.setProperty('position', 'fixed', 'important');
-          el.style.setProperty('right', '20px', 'important');
-          el.style.setProperty('z-index', '9999', 'important');
-          // loader = button; widgetRoot = chat window
-          el.style.setProperty('bottom', el === loader ? '20px' : '90px', 'important');
-          el.style.setProperty('left', 'auto', 'important');
-          el.style.setProperty('top', 'auto', 'important');
-          el.style.setProperty('transform', 'none', 'important');
+        
+        // Look for the widget elements that get injected
+        // This covers both the chat button and open window
+        const widgetElements = document.querySelectorAll('[id^="haive-"], [class^="haive-"], [data-haive]');
+        
+        // Apply fixed positioning to all related elements
+        widgetElements.forEach(element => {
+          // Skip the original script tag
+          if (element === loader) return;
+          
+          // Chat button handling
+          if (element.tagName === 'BUTTON' || element.classList.contains('button') || 
+              element.getAttribute('aria-label')?.includes('chat')) {
+            element.classList.add('haive-fixed-container');
+            applyStyles(element, {
+              position: 'fixed',
+              bottom: '20px',
+              right: '20px',
+              zIndex: '9999',
+            });
+          } 
+          // Chat window/container handling
+          else if (element.tagName === 'DIV' && 
+                  (element.classList.contains('window') || 
+                   element.classList.contains('container') || 
+                   element.classList.contains('chat'))) {
+            element.classList.add('haive-chat-window');
+            applyStyles(element, {
+              position: 'fixed',
+              bottom: '90px',
+              right: '20px',
+              zIndex: '9999',
+              width: '350px',
+              maxWidth: '90vw',
+              maxHeight: '600px'
+            });
+          }
+          // Any parent wrappers
+          else {
+            applyStyles(element, {
+              position: 'static',
+              transform: 'none',
+              zIndex: '9999'
+            });
+          }
         });
       }
-
-      window.addEventListener('load', pinHaiVEWidget);
-      new MutationObserver(pinHaiVEWidget).observe(document.body, {
-        childList: true,
-        subtree: true
+      
+      // Helper to apply styles with !important
+      function applyStyles(element, styles) {
+        Object.entries(styles).forEach(([property, value]) => {
+          element.style.setProperty(property, value, 'important');
+        });
+      }
+      
+      // Run immediately and set up observers
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initial run
+        fixHaiVEWidgetPosition();
+        
+        // Run periodically to catch any dynamic changes
+        setInterval(fixHaiVEWidgetPosition, 500);
+        
+        // Also watch for DOM changes
+        new MutationObserver(function(mutations) {
+          fixHaiVEWidgetPosition();
+        }).observe(document.body, { 
+          childList: true, 
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['style', 'class']
+        });
       });
     </script>
 
