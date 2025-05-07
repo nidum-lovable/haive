@@ -4,14 +4,15 @@ import React from 'react';
 const pressItems = [
   {
     publication: "INDIAi",
-    logo: "/lovable-uploads/f256843c-da79-4984-a24a-a4a7ef8cb765.png",
+    logo: "/lovable-uploads/9d5ea631-4e7c-4bc9-9714-098bb2ebee66.png",
     position: "top-left",
     link: "https://indiaai.gov.in"
   },
   {
     publication: "The Hindu",
-    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
-    position: "top-center"
+    logo: "/lovable-uploads/b720ab93-ed6f-4a62-99f3-0de00b924135.png",
+    position: "top-center",
+    link: "https://www.thehindu.com/news/cities/chennai/indias-first-ai-focused-technology-business-incubator-unveiled-in-tamil-nadu/article67513867.ece"
   },
   {
     publication: "Financial Express",
