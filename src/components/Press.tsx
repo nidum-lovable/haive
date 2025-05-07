@@ -46,21 +46,21 @@ const Press = () => {
           {pressItems.slice(0, 3).map((item, index) => (
             <div 
               key={index}
-              className="flex justify-center items-center hover:opacity-80 transition-opacity h-36"
+              className={`flex justify-center items-center hover:opacity-80 transition-opacity h-36 ${item.publication === "INDIAi" ? "h-40" : ""}`}
             >
               {item.link ? (
                 <a href={item.link} target="_blank" rel="noopener noreferrer" className="block h-full flex items-center">
                   <img 
                     src={item.logo} 
                     alt={item.publication}
-                    className="max-h-32 max-w-full object-contain" 
+                    className={`max-w-full object-contain ${item.publication === "INDIAi" ? "max-h-36" : "max-h-32"}`} 
                   />
                 </a>
               ) : (
                 <img 
                   src={item.logo} 
                   alt={item.publication}
-                  className="max-h-32 max-w-full object-contain" 
+                  className={`max-w-full object-contain ${item.publication === "INDIAi" ? "max-h-36" : "max-h-32"}`} 
                 />
               )}
             </div>
