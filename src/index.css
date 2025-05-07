@@ -51,7 +51,7 @@
   body {
     @apply bg-haive-dark text-foreground;
     height: 100%;
-    padding-bottom: 200px !important;
+    padding-bottom: 220px !important;
     position: relative;
   }
 
@@ -62,8 +62,13 @@
 
 /* HaiVE widget positioning */
 [data-haive-widget] {
-  z-index: 50 !important;
+  z-index: 1000 !important;
   bottom: 20px !important;
   right: 20px !important;
   position: fixed !important;
+}
+
+/* Added padding to ensure content doesn't get hidden behind the widget */
+.mb-20 {
+  margin-bottom: 5rem;
 }
