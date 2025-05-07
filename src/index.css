@@ -51,6 +51,9 @@
   body {
     @apply bg-haive-dark text-foreground;
     height: 100%;
+    /* Add padding to prevent widget overlap */
+    padding-bottom: 140px;
+    position: relative;
   }
 
   section {
@@ -74,4 +77,16 @@
   .section-heading {
     @apply text-3xl md:text-4xl font-bold mb-8 gradient-text;
   }
+}
+
+/* HaiVE widget adjustments */
+[data-haive-widget] {
+  z-index: 1000 !important;
+  bottom: 20px !important;
+}
+
+/* Main content needs to be above the widget */
+#root {
+  position: relative;
+  z-index: 1;
 }

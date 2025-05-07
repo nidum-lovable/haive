@@ -17,11 +17,28 @@ const checkHaiveScriptLoaded = () => {
         if (widgetElement) {
           console.log('HaiVE widget is successfully initialized in the DOM');
           
-          // Add extra CSS to ensure widget doesn't overlap content
+          // Add more aggressive CSS to ensure widget doesn't overlap content
           const styleElement = document.createElement('style');
           styleElement.textContent = `
-            body { padding-bottom: 100px !important; }
-            [data-haive-widget] { z-index: 1000 !important; }
+            body { 
+              padding-bottom: 160px !important; 
+              margin-bottom: 160px !important;
+            }
+            [data-haive-widget] { 
+              z-index: 1000 !important; 
+              bottom: 20px !important;
+              position: fixed !important;
+            }
+            #hero, section {
+              z-index: 1 !important;
+              position: relative !important;
+            }
+            .pb-56 {
+              padding-bottom: 14rem !important;
+            }
+            .pb-44 {
+              padding-bottom: 11rem !important;
+            }
           `;
           document.head.appendChild(styleElement);
         } else {

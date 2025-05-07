@@ -27,8 +27,8 @@ const Footer = () => {
         </div>
       </div>
       
-      {/* Add extra padding at the bottom to ensure no overlap with HaiVE widget */}
-      <div className="pb-40 md:pb-28"></div>
+      {/* Add significantly more padding at the bottom to ensure no overlap with HaiVE widget */}
+      <div className="pb-56 md:pb-44"></div>
     </footer>
   );
 };
