@@ -27,8 +27,8 @@ const Footer = () => {
         </div>
       </div>
       
-      {/* Sticky CTA Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-haive-dark-gray/80 backdrop-blur-lg py-4 border-t border-haive-teal/20 z-40">
+      {/* Sticky CTA Bar - Added more bottom padding to avoid overlapping with the HaiVE widget */}
+      <div className="fixed bottom-0 left-0 right-0 bg-haive-dark-gray/80 backdrop-blur-lg py-4 mb-16 border-t border-haive-teal/20 z-40">
         <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-center items-center gap-4">
           <ButtonCTA variant="primary">Get Started – Free Trial</ButtonCTA>
           <ButtonCTA variant="secondary">Create your Agent Army</ButtonCTA>
