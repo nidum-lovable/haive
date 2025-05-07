@@ -1,114 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>agent-hive-deploy</title>
-  <meta name="description" content="Lovable Generated Project" />
-  <meta name="author" content="Lovable" />
-  <meta property="og:title" content="agent-hive-deploy" />
-  <meta property="og:description" content="Lovable Generated Project" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@lovable_dev" />
-  <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png" />
-
+  <meta name="description" content="Lovable Generated Project"/>
+  <meta name="author" content="Lovable"/>
+  <meta property="og:title" content="agent-hive-deploy"/>
+  <meta property="og:description" content="Lovable Generated Project"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@lovable_dev"/>
+  <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
+  <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png"/>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow-y: auto;
-      overscroll-behavior-y: none;
-    }
-
-    #root {
-      min-height: 100%;
-    }
-
-    .haive-widget {
-      position: fixed !important;
-      bottom: 20px !important;
-      right: 20px !important;
-      z-index: 9999 !important;
-      pointer-events: auto !important;
-    }
-
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior-y: none;
+  }
+  #root {
+    min-height: 100%;
+  }
+  /* Simplified widget styling to avoid conflicts */
+  .haive-widget {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 9999 !important;
+  }
+  
+  /* Widget container styling */
+  .haive-container {
+    position: fixed !important;
+    bottom: 90px !important;
+    right: 20px !important;
+    max-width: 90vw !important;
+    max-height: 600px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
+    z-index: 9998 !important;
+    pointer-events: auto !important; /* Important - allow interactions */
+  }
+  
+  @media (max-width: 768px) {
     .haive-container {
-      position: fixed !important;
-      bottom: 90px !important;
-      right: 20px !important;
-      max-width: 90vw !important;
-      max-height: 600px !important;
-      border-radius: 16px !important;
-      box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16) !important;
-      z-index: 9998 !important;
-      pointer-events: auto !important;
+      max-width: 85vw !important;
+      max-height: 60vh !important;
     }
-
-    @media (max-width: 768px) {
-      .haive-container {
-        max-width: 85vw !important;
-        max-height: 60vh !important;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <div id="root"></div>
-
-  <!-- Main React App -->
+  <!-- Your main app script -->
   <script type="module" src="/src/main.tsx"></script>
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-
-  <!-- HaiVE Widget Script -->
+  
+  <!-- Improved HaiVE widget loading script -->
   <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const widgetScript = document.createElement('script');
-        widgetScript.src = "https://widget.haive.tech/widget.iife.js";
-        widgetScript.async = true;
-        widgetScript.className = "haive-widget";
-        widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
-        widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
-        widgetScript.setAttribute('data-assistant_name', 'Sara');
-        document.body.appendChild(widgetScript);
-
-        const enforceWidgetStyle = () => {
-          const allContainers = Array.from(document.querySelectorAll('div, iframe'))
-            .filter(el =>
-              el !== widgetScript &&
-              (el.innerHTML.toLowerCase().includes('haive') ||
-               el.id?.toLowerCase().includes('widget') ||
-               el.className?.toLowerCase().includes('haive') ||
-               el.tagName === 'IFRAME')
-            );
-
-          allContainers.forEach(container => {
-            container.classList.add('haive-container');
-            container.style.pointerEvents = 'auto';
-
-            const inner = container.querySelectorAll('*');
-            inner.forEach(el => {
-              el.style.pointerEvents = 'auto';
-            });
+  window.addEventListener('load', () => {
+    // Short delay to ensure DOM is fully loaded
+    setTimeout(() => {
+      // Create and add the widget script
+      const widgetScript = document.createElement('script');
+      widgetScript.src = "https://widget.haive.tech/widget.iife.js";
+      widgetScript.async = true;
+      widgetScript.className = "haive-widget";
+      widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
+      widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
+      widgetScript.setAttribute('data-assistant_name', 'Sara');
+      document.body.appendChild(widgetScript);
+      
+      // More robust style enforcement
+      const enforceWidgetStyle = () => {
+        // Find the widget button
+        const widgetButton = document.querySelector('.haive-widget');
+        
+        // Find the chat container (the iframe or div that appears)
+        // This selector may need adjustment based on HaiVE's actual structure
+        const chatContainer = document.querySelector('.haive-widget + div, .haive-widget + iframe');
+        
+        if (chatContainer) {
+          // Add our class for styling
+          chatContainer.classList.add('haive-container');
+          
+          // Make sure all elements inside are clickable
+          const allElements = chatContainer.querySelectorAll('*');
+          allElements.forEach(el => {
+            el.style.pointerEvents = 'auto';
           });
-        };
-
-        // Initial delayed retries
-        [1000, 2000, 3000].forEach(delay => {
-          setTimeout(enforceWidgetStyle, delay);
-        });
-
-        // DOM observer to catch late-added containers
-        new MutationObserver(() => enforceWidgetStyle()).observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      }, 500);
-    });
+          
+          // If it's an iframe, make it directly clickable
+          if (chatContainer.tagName === 'IFRAME') {
+            chatContainer.style.pointerEvents = 'auto';
+          }
+        }
+      };
+      
+      // Run style enforcement multiple times to catch widget after it loads
+      setTimeout(enforceWidgetStyle, 1000);
+      setTimeout(enforceWidgetStyle, 2000);
+      setTimeout(enforceWidgetStyle, 3000);
+      
+      // Also watch for DOM changes to catch when the widget appears
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.addedNodes.length) {
+            enforceWidgetStyle();
+          }
+        }
+      });
+      
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }, 500);
+  });
   </script>
 </body>
 </html>
