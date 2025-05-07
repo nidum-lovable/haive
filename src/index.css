@@ -51,24 +51,59 @@
   body {
     @apply bg-haive-dark text-foreground;
     height: 100%;
-    padding-bottom: 220px !important;
+    /* Increase bottom padding to prevent widget overlap */
+    padding-bottom: 200px !important;
     position: relative;
+  }
+
+  section {
+    position: relative;
+    padding: 4rem 2rem;
+    background-color: #000000; /* Set consistent black background for all sections */
+  }
+
+  .hexagon {
+    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  }
+
+  .glassmorphism {
+    @apply bg-opacity-10 backdrop-blur-md border border-white/10 bg-white;
   }
 
   .gradient-text {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-haive-orange to-haive-orange-light;
   }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl font-bold mb-8 gradient-text;
+  }
 }
 
 /* HaiVE widget positioning */
 [data-haive-widget] {
-  z-index: 1000 !important;
+  z-index: 50 !important; /* Lower z-index than header and footer */
   bottom: 20px !important;
   right: 20px !important;
   position: fixed !important;
 }
 
-/* Added padding to ensure content doesn't get hidden behind the widget */
-.mb-20 {
-  margin-bottom: 5rem;
+/* Header and Footer have higher z-index to appear above the widget */
+header {
+  z-index: 100 !important; /* Higher z-index to stay above widget */
+  position: fixed;
+  width: 100%;
+}
+
+/* Hero section adjustments */
+#hero {
+  padding-bottom: 6rem;
+  position: relative;
+  z-index: 10; /* Lower than header but higher than widget */
+}
+
+/* Footer adjustments */
+footer {
+  padding-bottom: 240px !important;
+  position: relative;
+  z-index: 100 !important; /* Higher z-index to stay above widget */
 }
