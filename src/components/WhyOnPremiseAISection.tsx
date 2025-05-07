@@ -1,13 +1,8 @@
 import React from 'react';
 import { Shield, CloudOff, DollarSign, Clock, Settings, Play } from 'lucide-react';
 import ButtonCTA from './ui/ButtonCTA';
-
 const WhyOnPremiseAISection = () => {
-  return (
-    <section 
-      id="why-on-prem-ai" 
-      className="py-20 relative overflow-hidden"
-    >
+  return <section id="why-on-prem-ai" className="py-0 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <h2 className="section-heading text-center">Why On-Premise AI?</h2>
         
@@ -80,8 +75,6 @@ const WhyOnPremiseAISection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default WhyOnPremiseAISection;
