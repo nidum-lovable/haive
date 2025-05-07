@@ -8,16 +8,21 @@
     <style>
       /* Ensure the HaiVE widget container allows events to pass through */
       #haive-widget-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 9999;
-        pointer-events: none; /* This allows clicks to pass through the container */
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 9999 !important;
+        pointer-events: none !important; /* Allow clicks to pass through container */
       }
       
-      /* But the actual widget elements should receive pointer events */
-      #haive-widget-container > * {
-        pointer-events: auto;
+      /* But widget elements should receive clicks */
+      #haive-widget-container > *:not(#haive-script) {
+        pointer-events: auto !important; /* Make widget elements clickable */
+      }
+      
+      /* Additional override to ensure proper behavior */
+      body, #root {
+        pointer-events: auto !important;
       }
     </style>
   </head>
