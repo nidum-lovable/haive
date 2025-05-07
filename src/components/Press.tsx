@@ -22,7 +22,7 @@ const pressItems = [
   },
   {
     publication: "AIM",
-    logo: "/lovable-uploads/eb0c88b7-7be5-4438-9f87-de5ac6989e67.png",
+    logo: "/lovable-uploads/d6da7007-2534-4fab-80e3-0e8e5a51e3b7.png",
     position: "bottom-left",
     link: "https://analyticsindiamag.com/chennai-based-startup-behind-first-ai-university-professor-launches-personal-ai-home-studio/"
   },
