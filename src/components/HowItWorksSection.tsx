@@ -81,7 +81,7 @@ const HowItWorksSection = () => {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 items-center">
               <div className="bg-haive-dark-gray rounded-lg overflow-hidden">
                 <img 
                   src="/lovable-uploads/3958f6fb-cf21-45c1-b313-bf3b035d9387.png" 
@@ -89,7 +89,10 @@ const HowItWorksSection = () => {
                   className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="bg-haive-dark-gray rounded-lg overflow-hidden">
+              <div className="flex justify-center items-center text-haive-orange font-bold text-xl">
+                OR
+              </div>
+              <div className="bg-haive-dark-gray rounded-lg overflow-hidden col-start-2">
                 <img 
                   src="/lovable-uploads/8803cf14-0d30-4fcf-bf36-68e5e7e67276.png" 
                   alt="Vonage provider" 

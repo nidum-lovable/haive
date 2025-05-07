@@ -1,4 +1,3 @@
-
 import React from 'react';
 import TeamMember from './TeamMember';
 
@@ -7,12 +6,12 @@ const TeamSection = () => {
     {
       name: 'Deepika Loganathan',
       title: 'CO-FOUNDER & CEO',
-      image: '/lovable-uploads/eb22f08a-ab87-489a-9ed7-81fe10d182d7.png'
+      image: '/lovable-uploads/2178dd2d-066d-4e83-9ef4-3bb903e3a9fb.png'
     },
     {
       name: 'Arjun Reddy',
       title: 'CO-FOUNDER & CTO',
-      image: '/lovable-uploads/1a8638bb-360e-4eb9-8ba9-083d2420d116.png'
+      image: '/lovable-uploads/47e047b0-d046-4e76-ba79-d95c000a2853.png'
     },
     {
       name: 'Andrew Rothwell',
@@ -36,10 +35,23 @@ const TeamSection = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-white mb-16">Our Team</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          {/* CEO and CTO in the first row */}
+          {teamMembers.slice(0, 2).map((member, index) => (
             <TeamMember
               key={index}
+              name={member.name}
+              title={member.title}
+              image={member.image}
+            />
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Other team members in the second row */}
+          {teamMembers.slice(2).map((member, index) => (
+            <TeamMember
+              key={index + 2}
               name={member.name}
               title={member.title}
               image={member.image}
