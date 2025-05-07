@@ -23,7 +23,7 @@ const HeroSection = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
-            <ButtonCTA variant="primary" size="lg">Start Free Trial</ButtonCTA>
+            <ButtonCTA variant="primary" size="lg" onClick={() => window.open("https://speakup.haive.tech/", "_blank")}>Start Free Trial</ButtonCTA>
             <ButtonCTA variant="secondary" size="lg">Book a Demo</ButtonCTA>
           </div>
         </div>

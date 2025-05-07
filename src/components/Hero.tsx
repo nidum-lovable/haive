@@ -22,9 +22,14 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
-            <button className="bg-haive-orange hover:bg-haive-orange-light text-white font-bold py-3 px-6 rounded-lg transition-colors">
+            <a 
+              href="https://speakup.haive.tech/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-haive-orange hover:bg-haive-orange-light text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            >
               Start Free Trial
-            </button>
+            </a>
             <button className="bg-transparent hover:bg-white/10 text-white font-bold py-3 px-6 rounded-lg border border-white/20 transition-colors">
               Book a Demo
             </button>
