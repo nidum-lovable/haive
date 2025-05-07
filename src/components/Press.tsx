@@ -22,8 +22,9 @@ const pressItems = [
   },
   {
     publication: "AIM",
-    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
-    position: "bottom-left"
+    logo: "/lovable-uploads/eb0c88b7-7be5-4438-9f87-de5ac6989e67.png",
+    position: "bottom-left",
+    link: "https://analyticsindiamag.com/chennai-based-startup-behind-first-ai-university-professor-launches-personal-ai-home-studio/"
   },
   {
     publication: "Outlook Start-Up",
@@ -71,11 +72,21 @@ const Press = () => {
               key={index}
               className="flex justify-center items-center hover:opacity-80 transition-opacity"
             >
-              <img 
-                src={item.logo} 
-                alt={item.publication}
-                className="max-h-20 max-w-full object-contain" 
-              />
+              {item.link ? (
+                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block">
+                  <img 
+                    src={item.logo} 
+                    alt={item.publication}
+                    className="max-h-24 max-w-full object-contain" 
+                  />
+                </a>
+              ) : (
+                <img 
+                  src={item.logo} 
+                  alt={item.publication}
+                  className="max-h-20 max-w-full object-contain" 
+                />
+              )}
             </div>
           ))}
         </div>
