@@ -51,8 +51,8 @@
   body {
     @apply bg-haive-dark text-foreground;
     height: 100%;
-    /* Add padding to prevent widget overlap */
-    padding-bottom: 180px !important;
+    /* Increase bottom padding to prevent widget overlap */
+    padding-bottom: 200px !important;
     position: relative;
   }
 
@@ -79,21 +79,20 @@
   }
 }
 
-/* HaiVE widget adjustments */
+/* HaiVE widget positioning with higher z-index */
 [data-haive-widget] {
-  z-index: 999999 !important;
+  z-index: 9999 !important;
   bottom: 20px !important;
   right: 20px !important;
   position: fixed !important;
 }
 
-/* Main content needs to be above the widget until the footer */
-#root {
-  position: relative;
-  z-index: 1;
-}
-
 /* Hero section adjustments */
 #hero {
   padding-bottom: 6rem;
+}
+
+/* Footer adjustments to prevent overlapping with widget */
+footer {
+  padding-bottom: 240px !important;
 }
