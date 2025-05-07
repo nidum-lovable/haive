@@ -3,26 +3,14 @@ import React from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
-import IntegrationsSection from '@/components/IntegrationsSection';
-import PricingSection from '@/components/PricingSection';
-import WhyHaiveSection from '@/components/WhyHaiveSection';
-import WhyOnPremiseAISection from '@/components/WhyOnPremiseAISection';
-import TechBadgesSection from '@/components/TechBadgesSection';
+import TeamSection from '@/components/TeamSection';
+import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
 // Create public/images directory for assets
 // These are placeholder declarations - in a real implementation, you'd have actual SVG files
 const mockImages = [
   "/images/hive-pattern.svg",
-  "/images/zendesk.svg",
-  "/images/zoho.svg",
-  "/images/freshworks.svg",
-  "/images/twilio.svg",
-  "/images/telynx.svg",
-  "/images/pdf.svg",
-  "/images/docx.svg",
-  "/images/xlsx.svg",
-  "/images/pptx.svg",
 ];
 
 const Index = () => {
@@ -32,11 +20,8 @@ const Index = () => {
       <main>
         <HeroSection />
         <HowItWorksSection />
-        <WhyOnPremiseAISection />
-        <IntegrationsSection />
-        <PricingSection />
-        <WhyHaiveSection />
-        <TechBadgesSection />
+        <TeamSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>
