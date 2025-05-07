@@ -35,7 +35,9 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
-          <a href="#how-it-works" className="text-gray-300 hover:text-haive-teal transition">How It Works</a>
+          <a href="#why-on-prem-ai" className="text-gray-300 hover:text-haive-teal transition">Why On-Premise</a>
+          <a href="#why-haive" className="text-gray-300 hover:text-haive-teal transition">Why HaiVE</a>
+          <a href="#pricing" className="text-gray-300 hover:text-haive-teal transition">Pricing</a>
           <a href="#team" className="text-gray-300 hover:text-haive-teal transition">Our Team</a>
           <a href="#contact" className="text-gray-300 hover:text-haive-teal transition">Contact</a>
         </nav>
@@ -54,11 +56,25 @@ const Header = () => {
         <div className="md:hidden bg-haive-dark-purple animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
             <a 
-              href="#how-it-works" 
+              href="#why-on-prem-ai" 
               className="text-gray-300 hover:text-haive-teal transition py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              How It Works
+              Why On-Premise
+            </a>
+            <a 
+              href="#why-haive" 
+              className="text-gray-300 hover:text-haive-teal transition py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Why HaiVE
+            </a>
+            <a 
+              href="#pricing" 
+              className="text-gray-300 hover:text-haive-teal transition py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Pricing
             </a>
             <a 
               href="#team" 

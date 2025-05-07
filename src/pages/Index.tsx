@@ -2,7 +2,9 @@
 import React from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
-import HowItWorksSection from '@/components/HowItWorksSection';
+import WhyOnPremiseAISection from '@/components/WhyOnPremiseAISection';
+import WhyHaiveSection from '@/components/WhyHaiveSection';
+import PricingSection from '@/components/PricingSection';
 import TeamSection from '@/components/TeamSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
@@ -19,7 +21,9 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <HowItWorksSection />
+        <WhyOnPremiseAISection />
+        <WhyHaiveSection />
+        <PricingSection />
         <TeamSection />
         <ContactSection />
       </main>

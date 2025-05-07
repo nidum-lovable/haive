@@ -1,3 +1,4 @@
+
 import React from 'react';
 import TeamMember from './TeamMember';
 
@@ -16,17 +17,17 @@ const TeamSection = () => {
     {
       name: 'Andrew Rothwell',
       title: 'FOUNDING ADVISOR',
-      image: '/lovable-uploads/d27794b6-b1e9-470f-83c8-bcf6a4072716.png'
+      image: '/lovable-uploads/132031da-c3f1-4372-8589-5cf7f11d07e4.png'
     },
     {
       name: 'Mohan Karuppiah',
       title: 'FOUNDING INVESTOR',
-      image: '/lovable-uploads/328e991c-71f4-44d3-b8b5-dba1d03dbde7.png'
+      image: '/lovable-uploads/f6d751c8-b1aa-49c6-a063-c1bb90823d1b.png'
     },
     {
       name: 'Jai Kumar',
       title: 'FOUNDING INVESTOR',
-      image: '/lovable-uploads/5016fd48-2402-4e88-aa5e-b67b892a0c1d.png'
+      image: '/lovable-uploads/b1e56ad0-6027-4f51-b735-2ff6516f78c3.png'
     }
   ];
 
