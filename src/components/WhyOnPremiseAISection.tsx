@@ -65,17 +65,22 @@ const WhyOnPremiseAISection = () => {
             </div>
             
             <ButtonCTA 
-              variant="secondary" 
-              className="p-6 rounded-xl bg-haive-dark-gray border border-haive-orange/20 hover:border-haive-orange/50 transition-all duration-300 flex flex-col items-start justify-center h-full"
-            >
-              <div className="flex items-center mb-4 w-full">
-                <div className="p-2 rounded-full bg-haive-orange/10 mr-3">
-                  <Play className="text-haive-orange h-5 w-5" />
-                </div>
-                <h3 className="text-xl font-bold text-white">See HaiVE in action</h3>
-              </div>
-              <p className="text-gray-300 align-left w-full">Experience the power and flexibility of <br/> on-premise AI firsthand.</p>
-            </ButtonCTA>
+  variant="secondary" 
+  className="p-6 rounded-xl bg-haive-dark-gray border border-haive-orange/20 hover:border-haive-orange/50 transition-all duration-300 flex flex-col justify-between"
+>
+  <div>
+    <div className="flex items-center mb-4">
+      <div className="p-2 rounded-full bg-haive-orange/10 mr-3">
+        <Play className="text-haive-orange h-5 w-5" />
+      </div>
+      <h3 className="text-xl font-bold text-white">See HaiVE in action</h3>
+    </div>
+    <p className="text-gray-300">
+      Experience the power and flexibility of on-premise AI firsthand.
+    </p>
+  </div>
+</ButtonCTA>
+
           </div>
         </div>
       </div>
