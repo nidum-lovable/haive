@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react'
 
 const HaiVEChatbot = () => {
   // Keep track of timeouts to clear them properly
-  const timeoutsRef = useRef<number[]>([]);
+  // Use NodeJS.Timeout type for compatibility with setTimeout
+  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   
   useEffect(() => {
     // Clean function to ensure the widget container has proper styles
