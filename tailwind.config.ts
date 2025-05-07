@@ -53,17 +53,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				},
-				// HaiVE custom colors
 				haive: {
 					orange: "#F97316",
 					"orange-light": "#FB923C",
@@ -91,13 +80,8 @@ export default {
 					"100%": { opacity: "1", transform: "translateY(0)" },
 				},
 				"pulse-teal": {
-					"0%, 100%": { backgroundColor: "rgba(0, 229, 201, 0.1)" },
-					"50%": { backgroundColor: "rgba(0, 229, 201, 0.2)" },
-				},
-				"gradient-flow": {
-					"0%": { backgroundPosition: "0% 50%" },
-					"50%": { backgroundPosition: "100% 50%" },
-					"100%": { backgroundPosition: "0% 50%" },
+					"0%, 100%": { backgroundColor: "rgba(249, 115, 22, 0.1)" },
+					"50%": { backgroundColor: "rgba(249, 115, 22, 0.2)" },
 				},
 				"float": {
 					"0%, 100%": { transform: "translateY(0)" },
@@ -109,12 +93,7 @@ export default {
 				"accordion-up": "accordion-up 0.2s ease-out",
 				"fade-in": "fade-in 0.6s ease-out",
 				"pulse-teal": "pulse-teal 3s infinite",
-				"gradient-flow": "gradient-flow 5s ease infinite",
 				"float": "float 6s ease-in-out infinite",
-			},
-			backgroundImage: {
-				"hive-pattern": "url('/images/hive-pattern.svg')",
-				"gradient-teal": "linear-gradient(135deg, #00E5C9 0%, #4FD1C5 100%)",
 			},
 		},
 	},

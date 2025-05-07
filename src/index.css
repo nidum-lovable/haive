@@ -49,15 +49,13 @@
   }
 
   body {
-    @apply bg-haive-dark text-foreground;
+    @apply bg-black text-foreground;
     height: 100%;
     position: relative;
   }
 
   section {
     position: relative;
-    padding: 4rem 2rem;
-    background-color: #000000; /* Set consistent black background for all sections */
     z-index: 1;
   }
 
@@ -68,14 +66,22 @@
   .glassmorphism {
     @apply bg-opacity-10 backdrop-blur-md border border-white/10 bg-white;
   }
+}
 
-  .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-haive-orange to-haive-orange-light;
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .section-heading {
-    @apply text-3xl md:text-4xl font-bold mb-8 gradient-text;
-  }
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
 }
 
 /* Hero section adjustments */
@@ -83,9 +89,4 @@
   padding-bottom: 6rem;
   position: relative;
   z-index: 1;
-}
-
-/* Ensure sections don't accidentally cover content */
-section, div {
-  position: relative;
 }

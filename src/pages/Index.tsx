@@ -1,29 +1,29 @@
 
 import React from 'react';
 import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import WhyOnPremiseAISection from '@/components/WhyOnPremiseAISection';
-import WhyHaiveSection from '@/components/WhyHaiveSection';
-import PricingSection from '@/components/PricingSection';
-import TeamSection from '@/components/TeamSection';
-import InThePressSection from '@/components/InThePressSection';
-import FAQsSection from '@/components/FAQsSection';
-import ContactSection from '@/components/ContactSection';
+import Hero from '@/components/Hero';
+import WhyOnPremiseAI from '@/components/WhyOnPremiseAI';
+import WhyHaive from '@/components/WhyHaive';
+import Pricing from '@/components/Pricing';
+import Team from '@/components/Team';
+import Press from '@/components/Press';
+import FAQs from '@/components/FAQs';
+import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-haive-dark text-white overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Header />
-      <main className="relative">
-        <HeroSection />
-        <WhyOnPremiseAISection />
-        <WhyHaiveSection />
-        <PricingSection />
-        <TeamSection />
-        <InThePressSection />
-        <FAQsSection />
-        <ContactSection />
+      <main>
+        <Hero />
+        <WhyOnPremiseAI />
+        <WhyHaive />
+        <Pricing />
+        <Team />
+        <Press />
+        <FAQs />
+        <Contact />
       </main>
       <Footer />
     </div>

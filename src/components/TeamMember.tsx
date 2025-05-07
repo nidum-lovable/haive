@@ -9,7 +9,7 @@ interface TeamMemberProps {
 }
 
 const TeamMember = ({ name, title, image }: TeamMemberProps) => {
-  // Split the name to get first name for the fallback
+  // Split the name to get initials for the fallback
   const nameParts = name.split(' ');
   const firstNameInitial = nameParts[0][0];
   const lastNameInitial = nameParts.length > 1 ? nameParts[1][0] : '';
