@@ -1,208 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>agent-hive-deploy</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <!-- Open Graph & Twitter -->
-    <meta property="og:title" content="agent-hive-deploy" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <!-- Favicon -->
-    <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png">
-
-    <!-- HaiVE Widget Critical CSS - Simplified and More Specific -->
-    <style>
-      /* Base styles */
-      body {
-        overflow-x: hidden;
-        position: relative;
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>agent-hive-deploy</title>
+  <meta name="description" content="Lovable Generated Project"/>
+  <meta name="author" content="Lovable"/>
+  <meta property="og:title" content="agent-hive-deploy"/>
+  <meta property="og:description" content="Lovable Generated Project"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@lovable_dev"/>
+  <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
+  <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png"/>
+  <style>
+    body, #root, main, section, header, footer { position: relative !important; z-index: 1 !important; overflow-x: hidden !important; }
+    .haive-widget, .haive-widget *, .haive-widget + div, .haive-widget + iframe {
+      position: fixed !important;
+      right: 20px !important;
+      z-index: 9999 !important;
+      transform: none !important;
+      left: auto !important;
+      top: auto !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+    }
+    .haive-widget { bottom: 20px !important; }
+    .haive-widget + div, .haive-widget + iframe {
+      bottom: 90px !important;
+      width: 350px !important;
+      max-width: 90vw !important;
+      max-height: 600px !important;
+      overflow: hidden !important;
+      box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
+      border-radius: 16px !important;
+    }
+    @media (max-width:768px) {
+      .haive-widget + div, .haive-widget + iframe {
+        max-width: 85vw !important;
+        max-height: 60vh !important;
       }
-      
-      /* Ensure site content doesn't overlap widget */
-      #root {
-        position: relative;
-        z-index: 1;
-      }
-
-      /* HaiVE Widget Container - Absolutely guaranteed visibility */
-      .haive-widget-container {
-        position: fixed !important;
-        bottom: 20px !important;
-        right: 20px !important;
-        z-index: 999999999 !important;
-        width: auto !important;
-        height: auto !important;
-        visibility: visible !important;
-        display: block !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        transform: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: visible !important;
-      }
-      
-      /* HaiVE Chat Window - Absolutely guaranteed visibility */
-      .haive-chat-window {
-        position: fixed !important;
-        bottom: 90px !important;
-        right: 20px !important;
-        z-index: 999999999 !important; 
-        width: 350px !important;
-        max-width: 90vw !important;
-        max-height: 600px !important;
-        visibility: visible !important;
-        display: block !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        transform: none !important;
-        margin: 0 !important;
-      }
-    </style>
-  </head>
-
-  <body class="overflow-auto">
-    <!-- React's root container -->
-    <div id="root"></div>
-
-    <!-- HaiVE Widget Insertion -->
-    <!-- Creating a dedicated container for the widget outside of React's control -->
-    <div id="haive-widget-mount" class="haive-widget-container"></div>
-
-    <!-- HaiVE Widget Script with new approach -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Create the HaiVE script
-        const haiveScript = document.createElement('script');
-        haiveScript.async = true;
-        haiveScript.src = "https://widget.haive.tech/widget.iife.js";
-        haiveScript.dataset.id = "e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e";
-        haiveScript.dataset.phone_number = "6XHPXCcYFelxHXcQ";
-        haiveScript.dataset.assistant_name = "Sara";
-        haiveScript.className = "haive-widget";
-        
-        // Mount it in our dedicated container
-        document.getElementById('haive-widget-mount').appendChild(haiveScript);
-        
-        // Ensure widget stays visible
-        function ensureWidgetVisibility() {
-          // Guarantee widget container visibility
-          const container = document.getElementById('haive-widget-mount');
-          if (container) {
-            Object.assign(container.style, {
-              position: 'fixed',
-              bottom: '20px',
-              right: '20px',
-              zIndex: '999999999',
-              visibility: 'visible',
-              display: 'block',
-              opacity: '1',
-              pointerEvents: 'auto'
-            });
-          }
-          
-          // Find all HaiVE-related elements
-          const widgetElements = document.querySelectorAll('[id^="haive-"], [class^="haive-"], [data-haive]');
-          
-          // Apply our styles to ensure visibility
-          widgetElements.forEach(element => {
-            // Skip script tags
-            if (element.tagName === 'SCRIPT') return;
-            
-            // Button/launcher styling
-            if (element.tagName === 'BUTTON' || 
-                element.getAttribute('aria-label')?.includes('chat') || 
-                element.classList.contains('button') ||
-                element.classList.contains('launcher')) {
-              
-              Object.assign(element.style, {
-                position: 'fixed',
-                bottom: '20px',
-                right: '20px',
-                zIndex: '999999999',
-                visibility: 'visible',
-                display: 'block',
-                opacity: '1',
-                pointerEvents: 'auto',
-                transform: 'none'
-              });
-              
-              element.classList.add('haive-widget-container');
-            } 
-            // Chat window styling
-            else if (element.tagName === 'DIV' && 
-                    (element.classList.contains('window') || 
-                     element.classList.contains('container') || 
-                     element.classList.contains('chat') ||
-                     element.classList.contains('frame'))) {
-              
-              Object.assign(element.style, {
-                position: 'fixed',
-                bottom: '90px',
-                right: '20px',
-                zIndex: '999999999',
-                visibility: 'visible',
-                display: 'block',
-                opacity: '1',
-                pointerEvents: 'auto',
-                transform: 'none',
-                width: '350px',
-                maxWidth: '90vw',
-                maxHeight: '600px'
-              });
-              
-              element.classList.add('haive-chat-window');
-            }
-            // Any parent/wrapper elements
-            else {
-              Object.assign(element.style, {
-                position: 'static',
-                visibility: 'visible',
-                display: 'block',
-                opacity: '1',
-                pointerEvents: 'auto',
-                transform: 'none',
-                zIndex: '999999'
-              });
-            }
-          });
-        }
-        
-        // Run our function periodically
-        const visibilityInterval = setInterval(ensureWidgetVisibility, 500);
-        
-        // Also watch for DOM changes to immediately fix any new widget elements
-        const observer = new MutationObserver(function(mutations) {
-          mutations.forEach(function(mutation) {
-            if (mutation.addedNodes.length) {
-              ensureWidgetVisibility();
-            }
-          });
-        });
-        
-        // Start observing with a robust configuration
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true,
-          attributes: true,
-          attributeFilter: ['style', 'class']
-        });
-      });
-    </script>
-
-    <!-- 3) Your React entrypoint -->
-    <script type="module" src="/src/main.tsx"></script>
-
-    <!-- 4) KEEP this last tag! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-  </body>
+    }
+  </style>
+</head>
+<body class="overflow-auto">
+  <div id="root"></div>
+  <script async src="https://widget.haive.tech/widget.iife.js" data-id="e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e" data-phone_number="6XHPXCcYFelxHXcQ" data-assistant_name="Sara" class="haive-widget"></script>
+  <script>
+    function pinHaiVEWidget(){const loader=document.querySelector('script.haive-widget');if(!loader)return;const widgetRoot=loader.nextElementSibling;[loader,widgetRoot].forEach(el=>{if(!el)return;el.style.setProperty('position','fixed','important');el.style.setProperty('right','20px','important');el.style.setProperty('z-index','9999','important');el.style.setProperty('bottom',el===loader?'20px':'90px','important');el.style.setProperty('left','auto','important');el.style.setProperty('top','auto','important');el.style.setProperty('transform','none','important');el.style.setProperty('opacity','1','important');el.style.setProperty('visibility','visible','important');el.style.setProperty('display','block','important');});}
+    window.addEventListener('load',pinHaiVEWidget);
+    new MutationObserver(pinHaiVEWidget).observe(document.body,{childList:true,subtree:true});
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+</body>
 </html>
