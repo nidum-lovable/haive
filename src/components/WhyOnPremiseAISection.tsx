@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Shield, CloudOff, DollarSign, Clock, Settings, Play } from 'lucide-react';
 import ButtonCTA from './ui/ButtonCTA';
@@ -64,23 +63,25 @@ const WhyOnPremiseAISection = () => {
               <p className="text-gray-300">Swap models, fine-tune offline, and avoid vendor lock-in.</p>
             </div>
             
-            <ButtonCTA 
-  variant="secondary" 
-  className="p-6 rounded-xl bg-haive-dark-gray border border-haive-orange/20 hover:border-haive-orange/50 transition-all duration-300 flex flex-col justify-between"
->
-  <div>
-    <div className="flex items-center mb-4">
-      <div className="p-2 rounded-full bg-haive-orange/10 mr-3">
-        <Play className="text-haive-orange h-5 w-5" />
-      </div>
-      <h3 className="text-xl font-bold text-white">See HaiVE in action</h3>
-    </div>
-    <p className="text-gray-300">
-      Experience the power and flexibility of on-premise AI firsthand.
-    </p>
-  </div>
-</ButtonCTA>
-
+            <div className="p-6 rounded-xl bg-haive-dark-gray border border-haive-orange/20 hover:border-haive-orange/50 transition-all duration-300 flex flex-col">
+              <div>
+                <div className="flex items-center mb-4">
+                  <div className="p-2 rounded-full bg-haive-orange/10 mr-3">
+                    <Play className="text-haive-orange h-5 w-5" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">See HaiVE in action</h3>
+                </div>
+                <p className="text-gray-300 mb-4">
+                  Experience the power and flexibility of on-premise AI firsthand.
+                </p>
+              </div>
+              <ButtonCTA 
+                variant="secondary" 
+                className="mt-auto"
+              >
+                Watch Demo
+              </ButtonCTA>
+            </div>
           </div>
         </div>
       </div>
