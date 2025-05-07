@@ -79,25 +79,31 @@
   }
 }
 
-/* HaiVE widget positioning with higher z-index */
+/* HaiVE widget positioning */
 [data-haive-widget] {
-  z-index: 9999 !important;
+  z-index: 50 !important; /* Lower z-index than header and footer */
   bottom: 20px !important;
   right: 20px !important;
   position: fixed !important;
-  pointer-events: auto !important;
+}
+
+/* Header and Footer have higher z-index to appear above the widget */
+header {
+  z-index: 100 !important; /* Higher z-index to stay above widget */
+  position: fixed;
+  width: 100%;
 }
 
 /* Hero section adjustments */
 #hero {
   padding-bottom: 6rem;
   position: relative;
-  z-index: 1;
+  z-index: 10; /* Lower than header but higher than widget */
 }
 
-/* Footer adjustments to prevent overlapping with widget */
+/* Footer adjustments */
 footer {
   padding-bottom: 240px !important;
   position: relative;
-  z-index: 1;
+  z-index: 100 !important; /* Higher z-index to stay above widget */
 }
