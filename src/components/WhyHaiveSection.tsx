@@ -22,7 +22,7 @@ const features = [
 
 const WhyHaiveSection = () => {
   return (
-    <section className="py-20 bg-haive-dark" id="why-haive">
+    <section className="py-16 bg-haive-dark" id="why-haive">
       <div className="container mx-auto px-4">
         <h2 className="section-heading text-center">Why HaiVE</h2>
         

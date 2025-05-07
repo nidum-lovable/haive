@@ -8,6 +8,8 @@ import PricingSection from '@/components/PricingSection';
 import TeamSection from '@/components/TeamSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import TechBadgesSection from '@/components/TechBadgesSection';
+import IntegrationsSection from '@/components/IntegrationsSection';
 
 // Create public/images directory for assets
 // These are placeholder declarations - in a real implementation, you'd have actual SVG files
@@ -25,7 +27,9 @@ const Index = () => {
         <WhyHaiveSection />
         <PricingSection />
         <TeamSection />
-        <ContactSection />
+        <TechBadgesSection /> {/* In the Press section */}
+        <IntegrationsSection /> {/* FAQs section placeholder */}
+        <ContactSection /> {/* Get in touch & Contact Section combined */}
       </main>
       <Footer />
     </div>
