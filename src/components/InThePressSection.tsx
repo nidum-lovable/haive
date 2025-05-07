@@ -4,7 +4,7 @@ import React from 'react';
 const pressItems = [
   {
     publication: "INDIAi",
-    logo: "/lovable-uploads/9d5ea631-4e7c-4bc9-9714-098bb2ebee66.png",
+    logo: "/lovable-uploads/c0bd72c3-f3b5-4b0d-acb2-a7667710bde9.png",
     position: "top-left",
     link: "https://indiaai.gov.in"
   },
