@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
     <style>
-      /* Ensure the HaiVE widget container allows events to pass through */
+      /* Widget container setup */
       #haive-widget-container {
         position: fixed !important;
         bottom: 20px !important;
@@ -15,13 +15,14 @@
         pointer-events: none !important; /* Allow clicks to pass through container */
       }
       
-      /* But widget elements should receive clicks */
-      #haive-widget-container > *:not(#haive-script) {
+      /* Any direct children inside widget container should receive clicks */
+      #haive-widget-container > * {
         pointer-events: auto !important; /* Make widget elements clickable */
       }
       
       /* Additional override to ensure proper behavior */
       body, #root {
+        position: relative !important;
         pointer-events: auto !important;
       }
     </style>

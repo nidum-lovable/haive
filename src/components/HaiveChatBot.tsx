@@ -3,8 +3,9 @@ import { useEffect } from 'react'
 
 const HaiVEChatbot = () => {
   useEffect(() => {
-    // Function to add the script if it doesn't exist
+    // Add the HaiVE script to the page
     const addHaiveScript = () => {
+      // Check if script already exists
       if (!document.getElementById('haive-script')) {
         const script = document.createElement('script')
         script.id = 'haive-script'
@@ -22,35 +23,46 @@ const HaiVEChatbot = () => {
         }
       }
     }
-    
-    // Function to set pointer events
-    const setPointerEvents = () => {
+
+    // Apply pointer events styling to ensure widget works while not blocking page interaction
+    const applyWidgetStyles = () => {
+      // 1. Set container to not capture pointer events
       const container = document.getElementById('haive-widget-container')
       if (container) {
-        // Make container allow clicks to pass through
-        (container as HTMLElement).style.pointerEvents = 'none'
-        
-        // Make widget elements clickable
+        container.style.pointerEvents = 'none'
+      }
+      
+      // 2. Set body and main content to capture pointer events
+      document.body.style.pointerEvents = 'auto'
+      const rootElement = document.getElementById('root')
+      if (rootElement) {
+        rootElement.style.pointerEvents = 'auto'
+      }
+      
+      // 3. Make all direct children of widget container clickable
+      if (container) {
         Array.from(container.children).forEach(child => {
-          if (child.id !== 'haive-script') {
-            (child as HTMLElement).style.pointerEvents = 'auto'
+          if (child instanceof HTMLElement) {
+            child.style.pointerEvents = 'auto'
           }
         })
       }
     }
     
-    // Add the script
+    // Setup initial state
     addHaiveScript()
     
-    // Apply pointer events immediately
-    setPointerEvents()
+    // Apply styles initially and after a delay (to catch dynamically added elements)
+    applyWidgetStyles()
+    const initialStyleTimeout = setTimeout(applyWidgetStyles, 1000)
+    const secondStyleTimeout = setTimeout(applyWidgetStyles, 2500)
     
-    // Set up observer to handle dynamically added elements
-    const observer = new MutationObserver((mutations) => {
-      setPointerEvents()
+    // Setup mutation observer to watch for changes in the widget container
+    const observer = new MutationObserver(() => {
+      applyWidgetStyles()
     })
     
-    // Start observing with a more comprehensive configuration
+    // Start observing the widget container for changes
     const container = document.getElementById('haive-widget-container')
     if (container) {
       observer.observe(container, { 
@@ -61,13 +73,11 @@ const HaiVEChatbot = () => {
       })
     }
     
-    // Ensure styles are applied after a delay as well
-    // (in case the widget loads after our initial setup)
-    const timeoutId = setTimeout(setPointerEvents, 2000)
-    
+    // Cleanup function
     return () => {
       observer.disconnect()
-      clearTimeout(timeoutId)
+      clearTimeout(initialStyleTimeout)
+      clearTimeout(secondStyleTimeout)
     }
   }, [])
 
