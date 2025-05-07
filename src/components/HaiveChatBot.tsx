@@ -45,11 +45,10 @@ const HaiVEChatbot = () => {
       // Special handling for widget container
       const widgetContainer = document.getElementById('haive-widget-container');
       if (widgetContainer) {
-        // Add specific styles to ensure widget works
         widgetContainer.style.pointerEvents = 'auto';
-        
-        // Set visibility based on state
         widgetContainer.style.display = isWidgetVisible ? 'block' : 'none';
+        widgetContainer.style.width = '350px';
+        widgetContainer.style.height = '600px';
       }
 
       // Ensure all buttons, links, and inputs are clickable
@@ -116,17 +115,17 @@ const HaiVEChatbot = () => {
     setWidgetVisible(prev => !prev);
   };
 
-  const closeWidget = () => {
-    setWidgetVisible(false);
-  };
-
   return (
     <>
       {/* Widget Container (visibility controlled by CSS) */}
       <div 
         id="haive-widget-container" 
         className="fixed bottom-20 right-20 z-[9999]"
-        style={{ display: isWidgetVisible ? 'block' : 'none' }}
+        style={{ 
+          display: isWidgetVisible ? 'block' : 'none',
+          width: '350px',
+          height: '600px'
+        }}
       />
       
       {/* Chat Toggle Button */}
