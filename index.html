@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,52 +19,53 @@
     <!-- Favicon -->
     <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png">
 
-    <!-- Tailwind base, components, utilities injected via your index.css -->
-
-    <!-- HaiVE widget styling - more aggressive approach -->
+    <!-- HaiVE Widget Critical CSS - Simplified and More Specific -->
     <style>
-      /* Global styles to ensure widget stays on top */
+      /* Base styles */
       body {
         overflow-x: hidden;
+        position: relative;
       }
-
-      /* Main content lower z-index */
-      #root, main, section, header, footer {
+      
+      /* Ensure site content doesn't overlap widget */
+      #root {
         position: relative;
         z-index: 1;
       }
 
-      /* Widget styling - forcefully applied with !important */
-      .haive-fixed-container {
+      /* HaiVE Widget Container - Absolutely guaranteed visibility */
+      .haive-widget-container {
         position: fixed !important;
         bottom: 20px !important;
         right: 20px !important;
-        z-index: 9999 !important;
+        z-index: 999999999 !important;
         width: auto !important;
         height: auto !important;
-        transform: none !important;
-        opacity: 1 !important;
         visibility: visible !important;
         display: block !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
       }
-
+      
+      /* HaiVE Chat Window - Absolutely guaranteed visibility */
       .haive-chat-window {
         position: fixed !important;
         bottom: 90px !important;
         right: 20px !important;
-        z-index: 9999 !important;
+        z-index: 999999999 !important; 
         width: 350px !important;
         max-width: 90vw !important;
         max-height: 600px !important;
-        transform: none !important;
-        opacity: 1 !important;
         visibility: visible !important;
         display: block !important;
-      }
-
-      /* Any extra elements that might be interfering */
-      [class*="footer"], [class*="Header"], .sticky, .fixed {
-        z-index: 1 !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        margin: 0 !important;
       }
     </style>
   </head>
@@ -74,91 +74,124 @@
     <!-- React's root container -->
     <div id="root"></div>
 
-    <!-- 1) HaiVE widget loader — appended outside of #root -->
-    <script
-      async
-      src="https://widget.haive.tech/widget.iife.js"
-      data-id="e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e"
-      data-phone_number="6XHPXCcYFelxHXcQ"
-      data-assistant_name="Sara"
-      class="haive-widget"
-    ></script>
+    <!-- HaiVE Widget Insertion -->
+    <!-- Creating a dedicated container for the widget outside of React's control -->
+    <div id="haive-widget-mount" class="haive-widget-container"></div>
 
-    <!-- 2) Enhanced widget positioning script -->
+    <!-- HaiVE Widget Script with new approach -->
     <script>
-      // More robust approach to ensure consistent widget positioning
-      function fixHaiVEWidgetPosition() {
-        // Find the loader script
-        const loader = document.querySelector('script.haive-widget');
-        if (!loader) return;
+      document.addEventListener('DOMContentLoaded', function() {
+        // Create the HaiVE script
+        const haiveScript = document.createElement('script');
+        haiveScript.async = true;
+        haiveScript.src = "https://widget.haive.tech/widget.iife.js";
+        haiveScript.dataset.id = "e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e";
+        haiveScript.dataset.phone_number = "6XHPXCcYFelxHXcQ";
+        haiveScript.dataset.assistant_name = "Sara";
+        haiveScript.className = "haive-widget";
         
-        // Look for the widget elements that get injected
-        // This covers both the chat button and open window
-        const widgetElements = document.querySelectorAll('[id^="haive-"], [class^="haive-"], [data-haive]');
+        // Mount it in our dedicated container
+        document.getElementById('haive-widget-mount').appendChild(haiveScript);
         
-        // Apply fixed positioning to all related elements
-        widgetElements.forEach(element => {
-          // Skip the original script tag
-          if (element === loader) return;
-          
-          // Chat button handling
-          if (element.tagName === 'BUTTON' || element.classList.contains('button') || 
-              element.getAttribute('aria-label')?.includes('chat')) {
-            element.classList.add('haive-fixed-container');
-            applyStyles(element, {
+        // Ensure widget stays visible
+        function ensureWidgetVisibility() {
+          // Guarantee widget container visibility
+          const container = document.getElementById('haive-widget-mount');
+          if (container) {
+            Object.assign(container.style, {
               position: 'fixed',
               bottom: '20px',
               right: '20px',
-              zIndex: '9999',
-            });
-          } 
-          // Chat window/container handling
-          else if (element.tagName === 'DIV' && 
-                  (element.classList.contains('window') || 
-                   element.classList.contains('container') || 
-                   element.classList.contains('chat'))) {
-            element.classList.add('haive-chat-window');
-            applyStyles(element, {
-              position: 'fixed',
-              bottom: '90px',
-              right: '20px',
-              zIndex: '9999',
-              width: '350px',
-              maxWidth: '90vw',
-              maxHeight: '600px'
+              zIndex: '999999999',
+              visibility: 'visible',
+              display: 'block',
+              opacity: '1',
+              pointerEvents: 'auto'
             });
           }
-          // Any parent wrappers
-          else {
-            applyStyles(element, {
-              position: 'static',
-              transform: 'none',
-              zIndex: '9999'
-            });
-          }
-        });
-      }
-      
-      // Helper to apply styles with !important
-      function applyStyles(element, styles) {
-        Object.entries(styles).forEach(([property, value]) => {
-          element.style.setProperty(property, value, 'important');
-        });
-      }
-      
-      // Run immediately and set up observers
-      document.addEventListener('DOMContentLoaded', function() {
-        // Initial run
-        fixHaiVEWidgetPosition();
+          
+          // Find all HaiVE-related elements
+          const widgetElements = document.querySelectorAll('[id^="haive-"], [class^="haive-"], [data-haive]');
+          
+          // Apply our styles to ensure visibility
+          widgetElements.forEach(element => {
+            // Skip script tags
+            if (element.tagName === 'SCRIPT') return;
+            
+            // Button/launcher styling
+            if (element.tagName === 'BUTTON' || 
+                element.getAttribute('aria-label')?.includes('chat') || 
+                element.classList.contains('button') ||
+                element.classList.contains('launcher')) {
+              
+              Object.assign(element.style, {
+                position: 'fixed',
+                bottom: '20px',
+                right: '20px',
+                zIndex: '999999999',
+                visibility: 'visible',
+                display: 'block',
+                opacity: '1',
+                pointerEvents: 'auto',
+                transform: 'none'
+              });
+              
+              element.classList.add('haive-widget-container');
+            } 
+            // Chat window styling
+            else if (element.tagName === 'DIV' && 
+                    (element.classList.contains('window') || 
+                     element.classList.contains('container') || 
+                     element.classList.contains('chat') ||
+                     element.classList.contains('frame'))) {
+              
+              Object.assign(element.style, {
+                position: 'fixed',
+                bottom: '90px',
+                right: '20px',
+                zIndex: '999999999',
+                visibility: 'visible',
+                display: 'block',
+                opacity: '1',
+                pointerEvents: 'auto',
+                transform: 'none',
+                width: '350px',
+                maxWidth: '90vw',
+                maxHeight: '600px'
+              });
+              
+              element.classList.add('haive-chat-window');
+            }
+            // Any parent/wrapper elements
+            else {
+              Object.assign(element.style, {
+                position: 'static',
+                visibility: 'visible',
+                display: 'block',
+                opacity: '1',
+                pointerEvents: 'auto',
+                transform: 'none',
+                zIndex: '999999'
+              });
+            }
+          });
+        }
         
-        // Run periodically to catch any dynamic changes
-        setInterval(fixHaiVEWidgetPosition, 500);
+        // Run our function periodically
+        const visibilityInterval = setInterval(ensureWidgetVisibility, 500);
         
-        // Also watch for DOM changes
-        new MutationObserver(function(mutations) {
-          fixHaiVEWidgetPosition();
-        }).observe(document.body, { 
-          childList: true, 
+        // Also watch for DOM changes to immediately fix any new widget elements
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length) {
+              ensureWidgetVisibility();
+            }
+          });
+        });
+        
+        // Start observing with a robust configuration
+        observer.observe(document.body, {
+          childList: true,
           subtree: true,
           attributes: true,
           attributeFilter: ['style', 'class']
