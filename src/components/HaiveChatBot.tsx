@@ -21,12 +21,14 @@ const HaiVEChatbot = () => {
         const container = document.getElementById('haive-widget-container')
         if (container) {
           // Make sure the container allows clicks to pass through
-          container.style.pointerEvents = 'none'
+          // Cast to HTMLElement to access style property
+          (container as HTMLElement).style.pointerEvents = 'none'
           
           // But actual widget elements should receive clicks
           Array.from(container.children).forEach(child => {
             if (child.id !== 'haive-script') {
-              child.style.pointerEvents = 'auto'
+              // Cast to HTMLElement to access style property
+              (child as HTMLElement).style.pointerEvents = 'auto'
             }
           })
         }
