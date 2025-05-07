@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MapPin, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Twitter, Linkedin, Mail } from 'lucide-react';
 
 const ContactSection = () => {
   const locations = [
@@ -32,9 +32,9 @@ const ContactSection = () => {
   ];
 
   const socialLinks = [
-    { icon: <Twitter className="h-6 w-6" />, url: '#', label: 'Twitter' },
-    { icon: <Linkedin className="h-6 w-6" />, url: '#', label: 'LinkedIn' },
-    { icon: <Mail className="h-6 w-6" />, url: '#', label: 'Email' }
+    { icon: <Twitter className="h-6 w-6" />, url: 'https://x.com/HaiveTech', label: 'Twitter' },
+    { icon: <Linkedin className="h-6 w-6" />, url: 'https://www.linkedin.com/company/haivetech/', label: 'LinkedIn' },
+    { icon: <Mail className="h-6 w-6" />, url: 'mailto:info@haive.tech', label: 'Email' }
   ];
 
   return (
@@ -71,6 +71,8 @@ const ContactSection = () => {
                 href={link.url} 
                 className="text-gray-400 hover:text-haive-orange transition-colors"
                 aria-label={link.label}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {link.icon}
               </a>
