@@ -3,9 +3,10 @@ import React from 'react';
 
 const pressItems = [
   {
-    publication: "INDIai",
-    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
-    position: "top-left"
+    publication: "INDIAi",
+    logo: "/lovable-uploads/f256843c-da79-4984-a24a-a4a7ef8cb765.png",
+    position: "top-left",
+    link: "https://indiaai.gov.in"
   },
   {
     publication: "The Hindu",
@@ -41,13 +42,23 @@ const InThePressSection = () => {
           {pressItems.slice(0, 3).map((item, index) => (
             <div 
               key={index}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center hover:opacity-80 transition-opacity"
             >
-              <img 
-                src={item.logo} 
-                alt={item.publication}
-                className="max-h-20 max-w-full object-contain" 
-              />
+              {item.link ? (
+                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block">
+                  <img 
+                    src={item.logo} 
+                    alt={item.publication}
+                    className="max-h-24 max-w-full object-contain" 
+                  />
+                </a>
+              ) : (
+                <img 
+                  src={item.logo} 
+                  alt={item.publication}
+                  className="max-h-20 max-w-full object-contain" 
+                />
+              )}
             </div>
           ))}
         </div>
@@ -56,7 +67,7 @@ const InThePressSection = () => {
           {pressItems.slice(3).map((item, index) => (
             <div 
               key={index}
-              className="flex justify-center items-center"
+              className="flex justify-center items-center hover:opacity-80 transition-opacity"
             >
               <img 
                 src={item.logo} 
