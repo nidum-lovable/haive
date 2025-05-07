@@ -16,51 +16,53 @@
   <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png"/>
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow-y: auto;
-      overscroll-behavior-y: none;
-    }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior-y: none;
+  }
 
-    #root {
-      min-height: 100%;
-    }
+  #root {
+    min-height: 100%;
+  }
 
-    /* Widget container positioning */
-    .haive-widget,
+  .haive-widget {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+  }
+
+  .haive-widget + div,
+  .haive-widget + iframe {
+    position: fixed !important;
+    bottom: 90px !important;
+    right: 20px !important;
+    max-width: 90vw !important;
+    max-height: 600px !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
+    z-index: 9999 !important;
+    pointer-events: none !important; /* Prevent scroll hijack */
+  }
+
+  .haive-widget + div * {
+    pointer-events: auto !important; /* Re-enable interaction only inside actual UI */
+  }
+
+  @media (max-width: 768px) {
     .haive-widget + div,
     .haive-widget + iframe {
-      position: fixed !important;
-      right: 20px !important;
-      bottom: 90px !important;
-      z-index: 9999 !important;
-      width: 350px !important;
-      max-width: 90vw !important;
-      max-height: 600px !important;
-      overflow: hidden !important;
-      border-radius: 16px !important;
-      box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      display: block !important;
-      transform: none !important;
-      pointer-events: auto !important;
+      max-width: 85vw !important;
+      max-height: 60vh !important;
     }
+  }
+</style>
 
-    .haive-widget * {
-      pointer-events: auto !important; /* Re-enable interaction inside */
-    }
-
-    @media (max-width: 768px) {
-      .haive-widget + div,
-      .haive-widget + iframe {
-        max-width: 85vw !important;
-        max-height: 60vh !important;
-      }
-    }
-  </style>
 </head>
 <body>
   <div id="root"></div>
@@ -71,47 +73,50 @@
 
   <!-- Load HaiVE widget after page load -->
   <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const widgetScript = document.createElement('script');
-        widgetScript.src = "https://widget.haive.tech/widget.iife.js";
-        widgetScript.async = true;
-        widgetScript.className = "haive-widget";
-        widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
-        widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
-        widgetScript.setAttribute('data-assistant_name', 'Sara');
-        document.body.appendChild(widgetScript);
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const widgetScript = document.createElement('script');
+      widgetScript.src = "https://widget.haive.tech/widget.iife.js";
+      widgetScript.async = true;
+      widgetScript.className = "haive-widget";
+      widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
+      widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
+      widgetScript.setAttribute('data-assistant_name', 'Sara');
+      document.body.appendChild(widgetScript);
 
-        const enforceWidgetStyle = () => {
-          const elements = document.querySelectorAll('.haive-widget, .haive-widget + div, .haive-widget + iframe');
-          elements.forEach(element => {
-            element.style.position = 'fixed';
-            element.style.right = '20px';
-            element.style.bottom = '90px';
-            element.style.left = 'auto';
-            element.style.top = 'auto';
-            element.style.zIndex = '9999';
-            element.style.transform = 'none';
-            element.style.opacity = '1';
-            element.style.visibility = 'visible';
-            element.style.display = 'block';
-            element.style.pointerEvents = 'auto';
-          });
-          // Restore inner pointer events
-          const innerElements = document.querySelectorAll('.haive-widget *');
-          innerElements.forEach(inner => {
-            inner.style.pointerEvents = 'auto';
-          });
-        };
+      const enforceWidgetStyle = () => {
+        const main = document.querySelector('.haive-widget');
+        const frame = main?.nextElementSibling;
 
-        // Initial fix and observe for mutations
-        setTimeout(enforceWidgetStyle, 1500);
-        new MutationObserver(enforceWidgetStyle).observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      }, 500); // Load widget after app mounts
-    });
-  </script>
+        if (main) {
+          main.style.position = 'fixed';
+          main.style.bottom = '20px';
+          main.style.right = '20px';
+          main.style.zIndex = '9999';
+          main.style.pointerEvents = 'auto';
+        }
+
+        if (frame) {
+          frame.style.position = 'fixed';
+          frame.style.bottom = '90px';
+          frame.style.right = '20px';
+          frame.style.zIndex = '9999';
+          frame.style.pointerEvents = 'none';
+        }
+
+        // Re-enable click inside
+        const insideElements = frame?.querySelectorAll('*') || [];
+        insideElements.forEach(el => el.style.pointerEvents = 'auto');
+      };
+
+      setTimeout(enforceWidgetStyle, 1500);
+      new MutationObserver(enforceWidgetStyle).observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }, 500);
+  });
+</script>
+
 </body>
 </html>
