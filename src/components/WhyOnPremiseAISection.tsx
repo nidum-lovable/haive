@@ -74,7 +74,7 @@ const WhyOnPremiseAISection = () => {
                 </div>
                 <h3 className="text-xl font-bold w-[90%] text-white">See HaiVE in action</h3>
               </div>
-              <p className="text-gray-300">Experience the power and flexibility of on-premise AI firsthand.</p>
+              <p className="text-gray-300 w-[70%]">Experience the power and flexibility of on-premise AI firsthand.</p>
             </ButtonCTA>
           </div>
         </div>
