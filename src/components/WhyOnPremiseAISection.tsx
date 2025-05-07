@@ -72,7 +72,7 @@ const WhyOnPremiseAISection = () => {
                 <div className="p-2 rounded-full bg-haive-orange/10 mr-3">
                   <Play className="text-haive-orange h-5 w-5" />
                 </div>
-                <h3 className="text-xl font-bold text-white">See HaiVE in action</h3>
+                <h3 className="text-xl font-bold w-[90%] text-white">See HaiVE in action</h3>
               </div>
               <p className="text-gray-300">Experience the power and flexibility of on-premise AI firsthand.</p>
             </ButtonCTA>
