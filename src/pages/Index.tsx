@@ -10,6 +10,7 @@ import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import TechBadgesSection from '@/components/TechBadgesSection';
 import IntegrationsSection from '@/components/IntegrationsSection';
+import FAQsSection from '@/components/FAQsSection';
 
 // Create public/images directory for assets
 // These are placeholder declarations - in a real implementation, you'd have actual SVG files
@@ -29,6 +30,7 @@ const Index = () => {
         <TeamSection />
         <TechBadgesSection />
         <IntegrationsSection />
+        <FAQsSection />
         <ContactSection />
       </main>
       <Footer />
