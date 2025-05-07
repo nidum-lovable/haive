@@ -6,56 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HaiVE</title>
     <style>
-      body, html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-      }
-      
-      #root {
-        height: 100%;
-        position: relative;
-        z-index: 1;
+      /* Reset styles for clickability */
+      html, body, #root, #root * {
+        pointer-events: auto !important;
       }
       
       /* HaiVE widget container */
       #haive-widget-container {
-        position: fixed !important;
-        bottom: 20px !important;
-        right: 20px !important;
-        z-index: 9999 !important;
-        pointer-events: none !important;
-        width: auto !important;
-        height: auto !important;
-        max-width: 500px !important;
-        min-width: 60px !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
       }
       
-      /* Only the actual widget content receives pointer events */
-      #haive-widget-container > * {
-        pointer-events: auto !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-      }
-      
-      /* Ensure dialogs, modals stay on top */
+      /* Ensure dialog elements remain on top */
       [role="dialog"],
       [role="alertdialog"],
       .modal,
-      .dropdown,
-      .popover {
-        z-index: 1000;
+      .popover,
+      .dropdown {
+        z-index: 9999;
+        pointer-events: auto !important;
       }
     </style>
   </head>
   <body>
     <div id="root"></div>
-    <div id="haive-widget-container" aria-live="polite"></div>
-    
+    <div id="haive-widget-container"></div>
+
     <!-- GPT Engineer Script -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>

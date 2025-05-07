@@ -106,30 +106,18 @@ main {
   z-index: 1;
 }
 
-/* HaiVE widget container proper positioning */
-#haive-widget-container {
+
+/* Free the HaiVE widget container */
+#my-widget-container {
+  all: unset;
   position: fixed !important;
   bottom: 20px !important;
   right: 20px !important;
-  width: auto !important;
-  height: auto !important;
-  max-width: 500px !important; /* Limit max width to prevent full screen takeover */
-  min-width: 60px !important; /* Ensure button is visible */
-  pointer-events: none !important; /* Container itself doesn't block clicks */
-  z-index: 999 !important;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
 }
 
-#haive-widget-container > * {
-  pointer-events: auto !important; /* Only actual widget elements receive clicks */
-}
-
-/* Ensure proper z-index hierarchy for other site elements */
-header, nav, footer {
-  position: relative;
-  z-index: 2;
-}
-
-main section {
-  position: relative;
-  z-index: 1;
+body, #root {
+  overflow: visible !important;
+  position: static !important;
 }
