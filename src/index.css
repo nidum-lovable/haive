@@ -44,8 +44,7 @@
 
   html {
     @apply scroll-smooth;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100%;
   }
 
@@ -55,11 +54,8 @@
   }
 
   section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    min-height: 100vh;
-    padding: 5rem 2rem;
     position: relative;
+    padding: 4rem 2rem;
   }
 
   .hexagon {
@@ -78,4 +74,3 @@
     @apply text-3xl md:text-4xl font-bold mb-8 gradient-text;
   }
 }
-
