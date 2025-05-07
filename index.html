@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
     <style>
+      /* Reset all pointer events to ensure proper behavior */
+      body, #root, #root *, #haive-widget-container, #haive-widget-container * {
+        pointer-events: auto;
+      }
+      
       /* Widget container setup */
       #haive-widget-container {
         position: fixed !important;
@@ -13,15 +18,28 @@
         right: 20px !important;
         z-index: 9999 !important;
         pointer-events: none !important; /* Allow clicks to pass through container */
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
       }
       
-      /* Any direct children inside widget container should receive clicks */
+      /* Direct children of widget container should be clickable */
       #haive-widget-container > * {
-        pointer-events: auto !important; /* Make widget elements clickable */
+        pointer-events: auto !important;
       }
       
-      /* Additional override to ensure proper behavior */
-      body, #root {
+      /* All elements inside the widget should be clickable */
+      #haive-widget-container * {
+        pointer-events: auto !important;
+      }
+      
+      /* Ensure proper interaction with page content */
+      body {
+        position: relative !important;
+        pointer-events: auto !important;
+      }
+      
+      #root {
         position: relative !important;
         pointer-events: auto !important;
       }

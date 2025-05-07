@@ -1,36 +1,13 @@
 import { useEffect, useRef } from 'react'
 
 const HaiVEChatbot = () => {
-  // Keep track of timeouts to clear them properly
-  // Use NodeJS.Timeout type for compatibility with setTimeout
+  // Keep track of timeouts for proper cleanup
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   
   useEffect(() => {
-    // Clean function to ensure the widget container has proper styles
-    const setupWidgetContainer = () => {
-      const container = document.getElementById('haive-widget-container');
-      if (!container) return;
-      
-      // Ensure container doesn't block interactions with the page
-      container.style.pointerEvents = 'none';
-      
-      // Find all direct children and make them clickable
-      Array.from(container.children).forEach(child => {
-        if (child instanceof HTMLElement) {
-          child.style.pointerEvents = 'auto';
-        }
-      });
-      
-      // Ensure the main page elements can receive interactions
-      document.body.style.pointerEvents = 'auto';
-      const rootElement = document.getElementById('root');
-      if (rootElement) {
-        rootElement.style.pointerEvents = 'auto';
-      }
-    };
-    
-    // Add HaiVE widget script if it doesn't exist
+    // Function to add the HaiVE script
     const addHaiveScript = () => {
+      // Skip if script already exists
       if (document.getElementById('haive-script')) return;
       
       const script = document.createElement('script');
@@ -47,31 +24,80 @@ const HaiVEChatbot = () => {
         container.appendChild(script);
       }
     };
+
+    // Function to fix pointer events
+    const fixPointerEvents = () => {
+      // Fix widget container
+      const widgetContainer = document.getElementById('haive-widget-container');
+      if (!widgetContainer) return;
+      
+      // Set widget container styles
+      Object.assign(widgetContainer.style, {
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        zIndex: '9999',
+        pointerEvents: 'none' // Allow clicks to pass through container
+      });
+      
+      // Ensure all widget elements are clickable
+      Array.from(widgetContainer.children).forEach(child => {
+        if (child instanceof HTMLElement) {
+          child.style.pointerEvents = 'auto';
+          
+          // Make all descendants of child clickable
+          const descendants = child.querySelectorAll('*');
+          descendants.forEach(descendant => {
+            if (descendant instanceof HTMLElement) {
+              descendant.style.pointerEvents = 'auto';
+            }
+          });
+        }
+      });
+      
+      // Ensure body and root elements are clickable
+      document.body.style.pointerEvents = 'auto';
+      const rootElement = document.getElementById('root');
+      if (rootElement) {
+        rootElement.style.pointerEvents = 'auto';
+        
+        // Make all content in root element clickable
+        const rootDescendants = rootElement.querySelectorAll('*');
+        rootDescendants.forEach(element => {
+          if (element instanceof HTMLElement) {
+            element.style.pointerEvents = 'auto';
+          }
+        });
+      }
+    };
     
     // Initial setup
     addHaiveScript();
-    setupWidgetContainer();
     
-    // Apply styles with multiple delays to catch async widget loading
-    const delays = [100, 500, 1000, 2000, 3000];
+    // Apply fixes immediately and with delays to catch async loading
+    fixPointerEvents();
+    
+    // Set up multiple delayed attempts to ensure widget loads properly
+    const delays = [100, 500, 1000, 2000, 3000, 5000];
     delays.forEach(delay => {
-      const timeoutId = setTimeout(setupWidgetContainer, delay);
+      const timeoutId = setTimeout(fixPointerEvents, delay);
       timeoutsRef.current.push(timeoutId);
     });
     
-    // Setup mutation observer with strong configuration
-    const observer = new MutationObserver(() => {
-      setupWidgetContainer();
+    // Set up mutation observer to apply fixes when DOM changes
+    const observer = new MutationObserver((mutations) => {
+      // Apply fixes after any DOM change
+      fixPointerEvents();
       
-      // Re-apply after slight delay to catch any nested changes
-      const timeoutId = setTimeout(setupWidgetContainer, 100);
+      // Add another delayed fix to ensure changes are caught
+      const timeoutId = setTimeout(fixPointerEvents, 100);
       timeoutsRef.current.push(timeoutId);
     });
     
-    // Watch for container changes with comprehensive config
-    const container = document.getElementById('haive-widget-container');
-    if (container) {
-      observer.observe(container, {
+    // Observe the widget container with comprehensive config
+    const widgetContainer = document.getElementById('haive-widget-container');
+    if (widgetContainer) {
+      observer.observe(widgetContainer, {
         childList: true,
         subtree: true,
         attributes: true,
@@ -80,16 +106,18 @@ const HaiVEChatbot = () => {
       });
     }
     
-    // Watch for body changes that might affect interaction
+    // Also observe the body to catch any other relevant changes
     observer.observe(document.body, {
       childList: true,
-      subtree: true,
-      attributes: true
+      subtree: true
     });
     
     // Cleanup function
     return () => {
+      // Disconnect observer
       observer.disconnect();
+      
+      // Clear all timeouts
       timeoutsRef.current.forEach(id => clearTimeout(id));
       timeoutsRef.current = [];
     };
