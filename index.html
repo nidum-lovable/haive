@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -105,6 +106,25 @@
         childList: true,
         subtree: true,
         attributes: true
+      });
+      
+      // Make sure widget stays above all other elements
+      document.addEventListener('DOMContentLoaded', function() {
+        // Add a style to ensure widget is always on top
+        const style = document.createElement('style');
+        style.innerHTML = `
+          .haive-widget,
+          .haive-widget * {
+            z-index: 9999 !important; 
+          }
+          section, header, footer {
+            z-index: 1;
+          }
+        `;
+        document.head.appendChild(style);
+        
+        // Run pinHaiVEWidget on a regular interval to force position
+        setInterval(pinHaiVEWidget, 1000);
       });
     </script>
 
