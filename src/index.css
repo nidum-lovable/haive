@@ -58,7 +58,7 @@
     position: relative;
     padding: 4rem 2rem;
     background-color: #000000; /* Set consistent black background for all sections */
-    z-index: 10; /* Lower than widget */
+    z-index: 1; /* Lower z-index than widget */
   }
 
   .hexagon {
@@ -78,22 +78,35 @@
   }
 }
 
-/* HaiVE widget positioning - adjusted to always stay visible */
+/* HaiVE widget positioning - ensure it's fixed and always on top */
 [data-haive-widget] {
-  z-index: 1000 !important; /* Highest z-index to always stay on top */
+  position: fixed !important;
   bottom: 20px !important;
   right: 20px !important;
-  position: fixed !important;
+  z-index: 9999 !important; /* Very high z-index */
+  pointer-events: auto !important;
 }
 
-/* Ensure content doesn't overlap with widget */
+/* Make sure widget iframe itself is visible */
+[data-haive-widget] iframe {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Add padding to the bottom of the page to prevent content from being hidden by widget */
 main {
-  padding-bottom: 80px;
+  padding-bottom: 100px;
+  position: relative;
 }
 
 /* Hero section adjustments */
 #hero {
   padding-bottom: 6rem;
   position: relative;
-  z-index: 10;
+  z-index: 1;
+}
+
+/* Ensure sections don't accidentally cover the widget */
+section, div {
+  position: relative;
 }
