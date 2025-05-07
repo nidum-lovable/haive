@@ -7,12 +7,18 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
           <div className="flex flex-col items-start">
-            {/* Replace text logo with image logo */}
-            <img 
-              src="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" 
-              alt="HaiVE Logo" 
-              className="h-8 w-auto mb-2"
-            />
+            {/* Make logo bigger and add HaiVE text */}
+            <div className="flex items-center mb-2">
+              <img 
+                src="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" 
+                alt="HaiVE Logo" 
+                className="h-10 w-auto mr-2"
+              />
+              <h1 className="text-2xl font-bold">
+                <span className="text-haive-orange">Hai</span>
+                <span className="text-white">VE</span>
+              </h1>
+            </div>
             <p className="text-gray-400 text-sm mt-1">Deploy AI agents that work.</p>
           </div>
           
