@@ -51,8 +51,6 @@
   body {
     @apply bg-haive-dark text-foreground;
     height: 100%;
-    /* Increase bottom padding to prevent widget overlap */
-    padding-bottom: 200px !important;
     position: relative;
   }
 
@@ -60,6 +58,7 @@
     position: relative;
     padding: 4rem 2rem;
     background-color: #000000; /* Set consistent black background for all sections */
+    z-index: 10; /* Lower than widget */
   }
 
   .hexagon {
@@ -79,31 +78,22 @@
   }
 }
 
-/* HaiVE widget positioning */
+/* HaiVE widget positioning - adjusted to always stay visible */
 [data-haive-widget] {
-  z-index: 50 !important; /* Lower z-index than header and footer */
+  z-index: 1000 !important; /* Highest z-index to always stay on top */
   bottom: 20px !important;
   right: 20px !important;
   position: fixed !important;
 }
 
-/* Header and Footer have higher z-index to appear above the widget */
-header {
-  z-index: 100 !important; /* Higher z-index to stay above widget */
-  position: fixed;
-  width: 100%;
+/* Ensure content doesn't overlap with widget */
+main {
+  padding-bottom: 80px;
 }
 
 /* Hero section adjustments */
 #hero {
   padding-bottom: 6rem;
   position: relative;
-  z-index: 10; /* Lower than header but higher than widget */
-}
-
-/* Footer adjustments */
-footer {
-  padding-bottom: 240px !important;
-  position: relative;
-  z-index: 100 !important; /* Higher z-index to stay above widget */
+  z-index: 10;
 }
