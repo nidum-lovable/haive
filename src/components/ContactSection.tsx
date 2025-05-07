@@ -6,6 +6,7 @@ const ContactSection = () => {
   const locations = [
     {
       country: 'Singapore',
+      image: '/lovable-uploads/6c069a4e-c770-41a0-b6de-e60b831ba217.png',
       address: [
         'No. 2 Venture Drive',
         '#09-24 Vision Exchange',
@@ -14,6 +15,7 @@ const ContactSection = () => {
     },
     {
       country: 'Australia',
+      image: '/lovable-uploads/aec54af8-2f4a-4a02-ba55-2f736959f287.png',
       address: [
         'Level 6, 201 Kent Street',
         'Barangaroo NSW 2000'
@@ -21,6 +23,7 @@ const ContactSection = () => {
     },
     {
       country: 'USA',
+      image: '/lovable-uploads/dc833bd9-516b-4b76-b6e5-6e01b4e4b99f.png',
       address: [
         '8400 W. Sunset Road',
         'Suite 300, Las Vegas, NV 89113'
@@ -42,9 +45,14 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {locations.map((location, index) => (
             <div key={index} className="flex flex-col items-center">
-              <div className="mb-4">
-                <MapPin className="h-12 w-12 text-haive-orange" />
+              <div className="mb-4 h-24 flex items-center justify-center">
+                <img 
+                  src={location.image} 
+                  alt={`${location.country} flag`} 
+                  className="max-h-24 w-auto"
+                />
               </div>
+              <h3 className="text-xl font-bold text-haive-orange mb-4">{location.country}</h3>
               <div className="text-center">
                 {location.address.map((line, i) => (
                   <p key={i} className="text-gray-300">{line}</p>

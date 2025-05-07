@@ -14,17 +14,25 @@ const TeamMember = ({ name, title, image }: TeamMemberProps) => {
   const firstNameInitial = nameParts[0][0];
   const lastNameInitial = nameParts.length > 1 ? nameParts[1][0] : '';
   
+  // Split the name for styling
+  const firstName = nameParts[0];
+  const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
+  
   return (
-    <div className="flex flex-col items-center p-6 bg-haive-dark-gray rounded-lg">
-      <Avatar className="h-32 w-32 border-2 border-haive-orange mb-6">
-        <AvatarImage src={image} alt={name} />
-        <AvatarFallback className="text-xl bg-haive-dark-purple text-haive-orange">
+    <div className="flex flex-col items-center p-6">
+      <Avatar className="h-32 w-32 mb-6">
+        <AvatarImage src={image} alt={name} className="rounded-full" />
+        <AvatarFallback className="text-xl bg-transparent text-haive-orange">
           {firstNameInitial}{lastNameInitial}
         </AvatarFallback>
       </Avatar>
       
-      <h3 className="text-xl font-bold text-white mb-2">{name}</h3>
-      <p className="text-sm font-medium tracking-wider text-gray-400 uppercase">{title}</p>
+      <div className="text-center">
+        <h3 className="text-2xl font-bold text-haive-orange mb-1">
+          {firstName}<br/>{lastName}
+        </h3>
+        <p className="text-sm font-medium tracking-wider text-white uppercase mt-2">{title}</p>
+      </div>
     </div>
   );
 };
