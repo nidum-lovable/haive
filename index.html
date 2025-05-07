@@ -14,7 +14,6 @@
   <meta name="twitter:site" content="@lovable_dev"/>
   <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
   <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png"/>
-
   <style>
   html, body {
     margin: 0;
@@ -23,58 +22,50 @@
     overflow-y: auto;
     overscroll-behavior-y: none;
   }
-
   #root {
     min-height: 100%;
   }
-
+  /* Simplified widget styling to avoid conflicts */
   .haive-widget {
     position: fixed !important;
     bottom: 20px !important;
     right: 20px !important;
     z-index: 9999 !important;
-    pointer-events: auto !important;
   }
-
-  .haive-widget + div,
-  .haive-widget + iframe {
+  
+  /* Widget container styling */
+  .haive-container {
     position: fixed !important;
     bottom: 90px !important;
     right: 20px !important;
     max-width: 90vw !important;
     max-height: 600px !important;
-    overflow: hidden !important;
     border-radius: 16px !important;
     box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
-    z-index: 9999 !important;
-    pointer-events: none !important; /* Prevent scroll hijack */
+    z-index: 9998 !important;
+    pointer-events: auto !important; /* Important - allow interactions */
   }
-
-  .haive-widget + div * {
-    pointer-events: auto !important; /* Re-enable interaction only inside actual UI */
-  }
-
+  
   @media (max-width: 768px) {
-    .haive-widget + div,
-    .haive-widget + iframe {
+    .haive-container {
       max-width: 85vw !important;
       max-height: 60vh !important;
     }
   }
 </style>
-
 </head>
 <body>
   <div id="root"></div>
-
   <!-- Your main app script -->
   <script type="module" src="/src/main.tsx"></script>
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-
-  <!-- Load HaiVE widget after page load -->
+  
+  <!-- Improved HaiVE widget loading script -->
   <script>
   window.addEventListener('load', () => {
+    // Short delay to ensure DOM is fully loaded
     setTimeout(() => {
+      // Create and add the widget script
       const widgetScript = document.createElement('script');
       widgetScript.src = "https://widget.haive.tech/widget.iife.js";
       widgetScript.async = true;
@@ -83,40 +74,53 @@
       widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
       widgetScript.setAttribute('data-assistant_name', 'Sara');
       document.body.appendChild(widgetScript);
-
+      
+      // More robust style enforcement
       const enforceWidgetStyle = () => {
-        const main = document.querySelector('.haive-widget');
-        const frame = main?.nextElementSibling;
-
-        if (main) {
-          main.style.position = 'fixed';
-          main.style.bottom = '20px';
-          main.style.right = '20px';
-          main.style.zIndex = '9999';
-          main.style.pointerEvents = 'auto';
+        // Find the widget button
+        const widgetButton = document.querySelector('.haive-widget');
+        
+        // Find the chat container (the iframe or div that appears)
+        // This selector may need adjustment based on HaiVE's actual structure
+        const chatContainer = document.querySelector('.haive-widget + div, .haive-widget + iframe');
+        
+        if (chatContainer) {
+          // Add our class for styling
+          chatContainer.classList.add('haive-container');
+          
+          // Make sure all elements inside are clickable
+          const allElements = chatContainer.querySelectorAll('*');
+          allElements.forEach(el => {
+            el.style.pointerEvents = 'auto';
+          });
+          
+          // If it's an iframe, make it directly clickable
+          if (chatContainer.tagName === 'IFRAME') {
+            chatContainer.style.pointerEvents = 'auto';
+          }
         }
-
-        if (frame) {
-          frame.style.position = 'fixed';
-          frame.style.bottom = '90px';
-          frame.style.right = '20px';
-          frame.style.zIndex = '9999';
-          frame.style.pointerEvents = 'none';
-        }
-
-        // Re-enable click inside
-        const insideElements = frame?.querySelectorAll('*') || [];
-        insideElements.forEach(el => el.style.pointerEvents = 'auto');
       };
-
-      setTimeout(enforceWidgetStyle, 1500);
-      new MutationObserver(enforceWidgetStyle).observe(document.body, {
+      
+      // Run style enforcement multiple times to catch widget after it loads
+      setTimeout(enforceWidgetStyle, 1000);
+      setTimeout(enforceWidgetStyle, 2000);
+      setTimeout(enforceWidgetStyle, 3000);
+      
+      // Also watch for DOM changes to catch when the widget appears
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.addedNodes.length) {
+            enforceWidgetStyle();
+          }
+        }
+      });
+      
+      observer.observe(document.body, {
         childList: true,
         subtree: true
       });
     }, 500);
   });
-</script>
-
+  </script>
 </body>
 </html>
