@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,10 +18,9 @@
     
     <!-- Adding the new favicon -->
     <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png">
-    
-    <!-- Custom styles for HaiVE widget -->
+
+    <!-- (Optional) Retain your custom CSS overrides -->
     <style>
-      /* Global override for HaiVE widget to ensure it's always fixed */
       .haive-widget,
       .haive-widget *,
       .haive-widget > *,
@@ -30,8 +28,6 @@
         position: fixed !important;
         z-index: 9999 !important;
       }
-      
-      /* Chat button positioning */
       .haive-widget button,
       .haive-widget [role="button"],
       .haive-widget > div:last-child:not(:first-child) {
@@ -39,22 +35,18 @@
         right: 20px !important;
         margin: 0 !important;
       }
-      
-      /* Chat container when opened */
       .haive-widget > div:not([role="button"]):not(button),
       .haive-widget iframe,
       .haive-widget > div:first-child:not(:last-child) {
         bottom: 90px !important;
         right: 20px !important;
-        max-height: 70vh !important; /* Ensure it doesn't get too tall on small screens */
-        max-width: 90vw !important; /* Responsive width */
-        min-width: 300px !important; /* Minimum width */
-        box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16) !important; /* Nice shadow for depth */
-        border-radius: 16px !important; /* Rounded corners */
-        overflow: hidden !important; /* Keep content within bounds */
+        max-height: 70vh !important;
+        max-width: 90vw !important;
+        min-width: 300px !important;
+        box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16) !important;
+        border-radius: 16px !important;
+        overflow: hidden !important;
       }
-      
-      /* Mobile responsiveness */
       @media (max-width: 768px) {
         .haive-widget > div:not([role="button"]):not(button),
         .haive-widget iframe,
@@ -69,7 +61,7 @@
   <body>
     <div id="root"></div>
     
-    <!-- HaiVE tag -->
+    <!-- HaiVE widget script -->
     <script
       async
       src="https://widget.haive.tech/widget.iife.js"
@@ -78,7 +70,44 @@
       data-assistant_name="Sara"
       class="haive-widget"
     ></script>
-    
+
+    <!-- Pin the widget via JS to ensure it stays fixed -->
+    <script>
+      function pinHaiVEWidget() {
+        const widget = document.querySelector('.haive-widget');
+        if (!widget) return;
+
+        // Pin the main widget container
+        widget.style.setProperty('position', 'fixed', 'important');
+        widget.style.setProperty('bottom', '20px', 'important');
+        widget.style.setProperty('right', '20px', 'important');
+        widget.style.setProperty('left', 'auto', 'important');
+        widget.style.setProperty('top', 'auto', 'important');
+        widget.style.setProperty('z-index', '9999', 'important');
+        widget.style.setProperty('transform', 'none', 'important');
+
+        // Pin any child divs/iframes (chat window, button, iframe)
+        widget.querySelectorAll('div, iframe').forEach(el => {
+          el.style.setProperty('position', 'fixed', 'important');
+          el.style.setProperty('bottom', el.tagName === 'IFRAME' ? '90px' : '20px', 'important');
+          el.style.setProperty('right', '20px', 'important');
+          el.style.setProperty('left', 'auto', 'important');
+          el.style.setProperty('top', 'auto', 'important');
+          el.style.setProperty('transform', 'none', 'important');
+          el.style.setProperty('z-index', '9999', 'important');
+        });
+      }
+
+      // Apply on load
+      window.addEventListener('load', pinHaiVEWidget);
+      // Re-apply on DOM changes
+      new MutationObserver(pinHaiVEWidget).observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true
+      });
+    </script>
+
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
