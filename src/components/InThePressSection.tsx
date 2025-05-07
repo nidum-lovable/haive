@@ -28,7 +28,7 @@ const pressItems = [
   },
   {
     publication: "Outlook Start-Up",
-    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
+    logo: "/lovable-uploads/6429e0b4-f2d1-459a-9aef-c517ffd293c0.png",
     position: "bottom-right",
     link: "https://startup.outlookindia.com/sector/saas/tamil-nadu-minister-for-msme-launches-ai-venture-factory-news-9824"
   }
