@@ -10,7 +10,7 @@ const pressItems = [
   },
   {
     publication: "The Hindu",
-    logo: "/lovable-uploads/0e1ab518-114c-426f-990e-fdc45089e006.png",
+    logo: "/lovable-uploads/ce1bdf26-c1e8-4854-b024-368c3f92238e.png",
     position: "top-center",
     link: "https://www.thehindu.com/news/cities/chennai/indias-first-ai-focused-technology-business-incubator-unveiled-in-tamil-nadu/article67513867.ece"
   },
