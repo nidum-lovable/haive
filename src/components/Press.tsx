@@ -46,21 +46,21 @@ const Press = () => {
           {pressItems.slice(0, 3).map((item, index) => (
             <div 
               key={index}
-              className="flex justify-center items-center hover:opacity-80 transition-opacity h-24"
+              className="flex justify-center items-center hover:opacity-80 transition-opacity h-36"
             >
               {item.link ? (
                 <a href={item.link} target="_blank" rel="noopener noreferrer" className="block h-full flex items-center">
                   <img 
                     src={item.logo} 
                     alt={item.publication}
-                    className="max-h-20 max-w-full object-contain" 
+                    className="max-h-32 max-w-full object-contain" 
                   />
                 </a>
               ) : (
                 <img 
                   src={item.logo} 
                   alt={item.publication}
-                  className="max-h-20 max-w-full object-contain" 
+                  className="max-h-32 max-w-full object-contain" 
                 />
               )}
             </div>
@@ -71,21 +71,21 @@ const Press = () => {
           {pressItems.slice(3).map((item, index) => (
             <div 
               key={index}
-              className="flex justify-center items-center hover:opacity-80 transition-opacity h-24"
+              className="flex justify-center items-center hover:opacity-80 transition-opacity h-36"
             >
               {item.link ? (
                 <a href={item.link} target="_blank" rel="noopener noreferrer" className="block h-full flex items-center">
                   <img 
                     src={item.logo} 
                     alt={item.publication}
-                    className="max-h-20 max-w-full object-contain" 
+                    className="max-h-32 max-w-full object-contain" 
                   />
                 </a>
               ) : (
                 <img 
                   src={item.logo} 
                   alt={item.publication}
-                  className="max-h-20 max-w-full object-contain" 
+                  className="max-h-32 max-w-full object-contain" 
                 />
               )}
             </div>
