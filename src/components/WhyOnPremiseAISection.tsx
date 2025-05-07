@@ -75,12 +75,7 @@ const WhyOnPremiseAISection = () => {
                   Experience the power and flexibility of on-premise AI firsthand.
                 </p>
               </div>
-              <ButtonCTA 
-                variant="secondary" 
-                className="mt-auto"
-              >
-                Watch Demo
-              </ButtonCTA>
+              
             </div>
           </div>
         </div>
