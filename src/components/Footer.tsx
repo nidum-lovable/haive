@@ -28,7 +28,7 @@ const Footer = () => {
       </div>
       
       {/* Spacer to prevent widget overlap */}
-      <div className="h-52"></div>
+      <div className="h-64"></div>
     </footer>
   );
 };

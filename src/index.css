@@ -52,7 +52,7 @@
     @apply bg-haive-dark text-foreground;
     height: 100%;
     /* Add padding to prevent widget overlap */
-    padding-bottom: 160px !important;
+    padding-bottom: 180px !important;
     position: relative;
   }
 
@@ -81,8 +81,9 @@
 
 /* HaiVE widget adjustments */
 [data-haive-widget] {
-  z-index: 10000 !important;
+  z-index: 999999 !important;
   bottom: 20px !important;
+  right: 20px !important;
   position: fixed !important;
 }
 
@@ -92,7 +93,7 @@
   z-index: 1;
 }
 
-/* Ensure footer padding is respected */
-footer {
-  margin-bottom: 8rem !important;
+/* Hero section adjustments */
+#hero {
+  padding-bottom: 6rem;
 }
