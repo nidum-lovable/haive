@@ -1,5 +1,7 @@
+
 import React from 'react';
 import ButtonCTA from './ui/ButtonCTA';
+
 const Footer = () => {
   return <footer className="py-10 bg-haive-dark-purple relative border-t border-gray-800">
       <div className="container mx-auto px-4">
@@ -24,8 +26,9 @@ const Footer = () => {
         </div>
       </div>
       
-      {/* Sticky CTA Bar - Added more bottom padding to avoid overlapping with the HaiVE widget */}
-      
+      {/* Add extra padding at the bottom to ensure no overlap with HaiVE widget */}
+      <div className="pb-24 md:pb-16"></div>
     </footer>;
 };
+
 export default Footer;
