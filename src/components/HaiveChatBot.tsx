@@ -51,7 +51,7 @@ const HaiVEChatbot = () => {
       container.style.position = 'fixed';
       container.style.bottom = '20px';
       container.style.right = '20px';
-      container.style.zIndex = '999';
+      container.style.zIndex = '9999';
       container.style.pointerEvents = 'none';
       container.style.width = 'auto';
       container.style.height = 'auto';
