@@ -23,7 +23,7 @@ const ContactSection = () => {
     },
     {
       country: 'USA',
-      image: '/lovable-uploads/dc833bd9-516b-4b76-b6e5-6e01b4e4b99f.png',
+      image: '/lovable-uploads/ea5a4d49-f927-479a-ae7d-07d1298619f6.png',
       address: [
         '8400 W. Sunset Road',
         'Suite 300, Las Vegas, NV 89113'
