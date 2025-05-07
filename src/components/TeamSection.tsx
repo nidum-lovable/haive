@@ -49,16 +49,16 @@ const TeamSection = () => {
 
 
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Other team members in the second row */}
-          {teamMembers.slice(2).map((member, index) => (
-            <TeamMember
-              key={index + 2}
-              name={member.name}
-              title={member.title}
-              image={member.image}
-            />
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10 max-w-6xl mx-auto">
+  {teamMembers.slice(2).map((member, index) => (
+    <TeamMember
+      key={index + 2}
+      name={member.name}
+      title={member.title}
+      image={member.image}
+    />
+  ))}
+</div>
         </div>
       </div>
     </section>
