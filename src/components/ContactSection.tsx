@@ -15,7 +15,7 @@ const ContactSection = () => {
     },
     {
       country: 'Australia',
-      image: '/lovable-uploads/aec54af8-2f4a-4a02-ba55-2f736959f287.png',
+      image: '/lovable-uploads/22b226f0-1b04-497b-b054-a475c2c18f0e.png',
       address: [
         'Level 6, 201 Kent Street',
         'Barangaroo NSW 2000'
