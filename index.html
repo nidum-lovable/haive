@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HaiVE</title>
     <style>
-      /* Global clickability reset */
-      * {
-        pointer-events: auto !important;
-      }
-      
       body, html {
         height: 100%;
         margin: 0;
@@ -24,22 +19,27 @@
         z-index: 1;
       }
       
-      /* HaiVE widget container */
+      /* HaiVE widget container - positioned in bottom right corner */
       #haive-widget-container {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        z-index: 9999;
-        pointer-events: auto !important;
+        z-index: 999; /* High but not blocking other UI */
+        pointer-events: none; /* Container itself doesn't block clicks */
       }
       
-      /* Make sure modals and dialogs stay on top */
+      /* Only the actual widget content receives pointer events */
+      #haive-widget-container > * {
+        pointer-events: auto;
+      }
+      
+      /* Ensure dialogs, modals stay on top */
       [role="dialog"],
       [role="alertdialog"],
       .modal,
       .dropdown,
       .popover {
-        z-index: 9999;
+        z-index: 1000;
       }
     </style>
   </head>

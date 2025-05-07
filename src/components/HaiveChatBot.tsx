@@ -27,88 +27,63 @@ const HaiVEChatbot = () => {
       document.getElementById('haive-widget-container')?.appendChild(script);
     };
 
-    // Function to make everything clickable
-    const makeEverythingClickable = () => {
-      // Strategy 1: Apply directly to all elements
-      document.querySelectorAll('*').forEach(el => {
-        if (el instanceof HTMLElement) {
-          el.style.setProperty('pointer-events', 'auto', 'important');
-        }
-      });
-      
-      // Strategy 2: Apply to specific elements that are most likely to be unclickable
-      const interactiveElements = document.querySelectorAll(
-        'a, button, input, select, textarea, [role="button"], .clickable, nav *, header *, footer *'
-      );
-      
-      interactiveElements.forEach(el => {
-        if (el instanceof HTMLElement) {
-          el.style.setProperty('pointer-events', 'auto', 'important');
-        }
-      });
-      
-      // Strategy 3: Make sure HaiVE container is clickable
-      const widgetContainer = document.getElementById('haive-widget-container');
-      if (widgetContainer) {
-        widgetContainer.style.setProperty('pointer-events', 'auto', 'important');
-        widgetContainer.style.zIndex = '9999';
-      }
-      
-      // Strategy 4: Add a global style to ensure everything is clickable
-      let clickabilityStyle = document.getElementById('global-clickability');
-      if (!clickabilityStyle) {
-        clickabilityStyle = document.createElement('style');
-        clickabilityStyle.id = 'global-clickability';
-        clickabilityStyle.textContent = `
-          * {
-            pointer-events: auto !important;
-          }
-          #haive-widget-container, #haive-widget-container * {
-            pointer-events: auto !important;
-            z-index: 9999;
-          }
-        `;
-        document.head.appendChild(clickabilityStyle);
-      }
-    };
-    
     // Initialize HaiVE
     initializeWidget();
     
-    // Make everything clickable initially
-    makeEverythingClickable();
+    // Fix any potential z-index issues with the chat widget
+    const fixChatWidgetLayout = () => {
+      // Find the widget container
+      const widgetContainer = document.getElementById('haive-widget-container');
+      if (!widgetContainer) return;
+      
+      // Check for any full-screen/fixed position elements within the widget
+      const fixedElements = widgetContainer.querySelectorAll('.fixed, [class*="fixed"], [style*="position: fixed"]');
+      fixedElements.forEach(el => {
+        if (el instanceof HTMLElement) {
+          // Ensure these elements don't have full inset that blocks the entire UI
+          if (el.style.inset === '0px' || el.classList.contains('inset-0')) {
+            el.style.inset = 'auto';
+            el.style.position = 'relative';
+          }
+          
+          // Ensure z-index is appropriate
+          if (parseInt(el.style.zIndex || '0') > 1000) {
+            el.style.zIndex = '999';
+          }
+        }
+      });
+      
+      // Ensure chat button stays in bottom right
+      const chatButton = widgetContainer.querySelector('button');
+      if (chatButton instanceof HTMLElement && !chatButton.style.position) {
+        chatButton.style.position = 'fixed';
+        chatButton.style.bottom = '20px';
+        chatButton.style.right = '20px';
+      }
+    };
     
-    // Create observer to watch for DOM changes and reapply clickability
-    const observer = new MutationObserver(() => {
-      makeEverythingClickable();
-    });
-    
-    // Start observing the entire document for all types of changes
-    observer.observe(document.documentElement, {
-      childList: true,
-      attributes: true,
-      subtree: true,
-      attributeFilter: ['style', 'class']
-    });
-    
-    // Set multiple timeouts to ensure clickability even after delayed rendering
-    const timeouts = [
-      setTimeout(makeEverythingClickable, 100),
-      setTimeout(makeEverythingClickable, 500),
-      setTimeout(makeEverythingClickable, 1000),
-      setTimeout(makeEverythingClickable, 2000),
-      setTimeout(makeEverythingClickable, 5000)
+    // Run the fix immediately and after a delay to catch dynamically loaded content
+    fixChatWidgetLayout();
+    const timeoutIds = [
+      setTimeout(fixChatWidgetLayout, 1000),
+      setTimeout(fixChatWidgetLayout, 2000)
     ];
     
-    // Add global click event to ensure clickability
-    document.addEventListener('click', () => {
-      makeEverythingClickable();
+    // Set up an observer to monitor for DOM changes in the widget container
+    const observer = new MutationObserver(() => {
+      fixChatWidgetLayout();
     });
     
-    // Add loadcomplete event for cases where content loads after page load
-    window.addEventListener('load', () => {
-      makeEverythingClickable();
-    });
+    // Start observing once the container exists
+    const widgetContainer = document.getElementById('haive-widget-container');
+    if (widgetContainer) {
+      observer.observe(widgetContainer, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+      });
+    }
     
     // Clean up function
     return () => {
@@ -116,24 +91,12 @@ const HaiVEChatbot = () => {
       observer.disconnect();
       
       // Clear all timeouts
-      timeouts.forEach(timeout => clearTimeout(timeout));
-      
-      // Remove click handler
-      document.removeEventListener('click', makeEverythingClickable);
-      
-      // Remove load handler
-      window.removeEventListener('load', makeEverythingClickable);
+      timeoutIds.forEach(id => clearTimeout(id));
       
       // Remove script if component unmounts
       const existingScript = document.getElementById('haive-script');
       if (existingScript) {
         existingScript.remove();
-      }
-      
-      // Remove style
-      const clickabilityStyle = document.getElementById('global-clickability');
-      if (clickabilityStyle) {
-        clickabilityStyle.remove();
       }
     };
   }, []);
