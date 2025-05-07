@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MapPin, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Twitter, Linkedin, Mail } from 'lucide-react';
 
 const Contact = () => {
   const locations = [
@@ -11,8 +11,7 @@ const Contact = () => {
         'No. 2 Venture Drive',
         '#09-24 Vision Exchange',
         'Singapore 608526'
-      ],
-      email: 'singapore@haive.tech'
+      ]
     },
     {
       country: 'Australia',
@@ -20,8 +19,7 @@ const Contact = () => {
       address: [
         'Level 6, 201 Kent Street',
         'Barangaroo NSW 2000'
-      ],
-      email: 'australia@haive.tech'
+      ]
     },
     {
       country: 'USA',
@@ -29,15 +27,14 @@ const Contact = () => {
       address: [
         '8400 W. Sunset Road',
         'Suite 300, Las Vegas, NV 89113'
-      ],
-      email: 'usa@haive.tech'
+      ]
     }
   ];
 
   const socialLinks = [
     { icon: <Twitter className="h-6 w-6" />, url: '#', label: 'Twitter' },
     { icon: <Linkedin className="h-6 w-6" />, url: '#', label: 'LinkedIn' },
-    { icon: <Mail className="h-6 w-6" />, url: 'mailto:info@haive.tech', label: 'Email' }
+    { icon: <Mail className="h-6 w-6" />, url: '#', label: 'Email' }
   ];
 
   return (
@@ -62,12 +59,6 @@ const Contact = () => {
                 {location.address.map((line, i) => (
                   <p key={i} className="text-gray-300">{line}</p>
                 ))}
-                <div className="flex items-center justify-center mt-4 text-haive-orange">
-                  <Mail className="h-4 w-4 mr-2" />
-                  <a href={`mailto:${location.email}`} className="hover:underline transition-all">
-                    {location.email}
-                  </a>
-                </div>
               </div>
             </div>
           ))}
