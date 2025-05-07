@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,107 +17,119 @@
   <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png"/>
 
   <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-y: auto;
-    overscroll-behavior-y: none;
-  }
-
-  #root {
-    min-height: 100%;
-  }
-
-  .haive-widget {
-    position: fixed !important;
-    bottom: 20px !important;
-    right: 20px !important;
-    z-index: 9999 !important;
-    pointer-events: auto !important;
-  }
-
-  .haive-widget + div,
-  .haive-widget + iframe {
-    position: fixed !important;
-    bottom: 90px !important;
-    right: 20px !important;
-    max-width: 90vw !important;
-    max-height: 600px !important;
-    overflow: hidden !important;
-    border-radius: 16px !important;
-    box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
-    z-index: 9999 !important;
-    pointer-events: none !important; /* Prevent scroll hijack */
-  }
-
-  .haive-widget + div * {
-    pointer-events: auto !important; /* Re-enable interaction only inside actual UI */
-  }
-
-  @media (max-width: 768px) {
-    .haive-widget + div,
-    .haive-widget + iframe {
-      max-width: 85vw !important;
-      max-height: 60vh !important;
+    /* Essential styles to ensure proper scrolling */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-y: auto !important;
     }
-  }
-</style>
-
+    
+    #root {
+      min-height: 100%;
+      position: relative;
+    }
+    
+    /* Widget container style */
+    #widget-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      pointer-events: none; /* Container doesn't block clicks */
+    }
+    
+    /* Widget button needs to receive clicks */
+    #widget-container .haive-widget {
+      pointer-events: auto;
+    }
+    
+    /* Chat window styling */
+    #widget-container + div,
+    #widget-container iframe {
+      position: fixed !important;
+      bottom: 90px !important;
+      right: 20px !important;
+      max-width: 90vw !important;
+      max-height: 600px !important;
+      overflow: hidden !important;
+      border-radius: 16px !important;
+      box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
+      z-index: 9998 !important;
+    }
+    
+    /* Elements inside the chat should receive pointer events */
+    #widget-container + div *,
+    #widget-container iframe * {
+      pointer-events: auto !important;
+    }
+    
+    @media (max-width: 768px) {
+      #widget-container + div,
+      #widget-container iframe {
+        max-width: 85vw !important;
+        max-height: 60vh !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="root"></div>
-
-  <!-- Your main app script -->
+  
+  <!-- Widget container -->
+  <div id="widget-container"></div>
+  
+  <!-- Main app script -->
   <script type="module" src="/src/main.tsx"></script>
+  
+  <!-- GPT Engineer script -->
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-
-  <!-- Load HaiVE widget after page load -->
+  
+  <!-- HaiVE Widget implementation -->
   <script>
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const widgetScript = document.createElement('script');
-      widgetScript.src = "https://widget.haive.tech/widget.iife.js";
-      widgetScript.async = true;
-      widgetScript.className = "haive-widget";
-      widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
-      widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
-      widgetScript.setAttribute('data-assistant_name', 'Sara');
-      document.body.appendChild(widgetScript);
-
-      const enforceWidgetStyle = () => {
-        const main = document.querySelector('.haive-widget');
-        const frame = main?.nextElementSibling;
-
-        if (main) {
-          main.style.position = 'fixed';
-          main.style.bottom = '20px';
-          main.style.right = '20px';
-          main.style.zIndex = '9999';
-          main.style.pointerEvents = 'auto';
-        }
-
-        if (frame) {
-          frame.style.position = 'fixed';
-          frame.style.bottom = '90px';
-          frame.style.right = '20px';
-          frame.style.zIndex = '9999';
-          frame.style.pointerEvents = 'none';
-        }
-
-        // Re-enable click inside
-        const insideElements = frame?.querySelectorAll('*') || [];
-        insideElements.forEach(el => el.style.pointerEvents = 'auto');
-      };
-
-      setTimeout(enforceWidgetStyle, 1500);
-      new MutationObserver(enforceWidgetStyle).observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-    }, 500);
-  });
-</script>
-
+    document.addEventListener('DOMContentLoaded', function() {
+      // Give the page time to fully render before adding the widget
+      setTimeout(function() {
+        // Create and configure the widget script
+        const widgetScript = document.createElement('script');
+        widgetScript.src = "https://widget.haive.tech/widget.iife.js";
+        widgetScript.async = true;
+        widgetScript.className = "haive-widget";
+        widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
+        widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
+        widgetScript.setAttribute('data-assistant_name', 'Sara');
+        
+        // Add widget to the container
+        document.getElementById('widget-container').appendChild(widgetScript);
+        
+        // Set up MutationObserver to maintain proper styling and interaction
+        const observer = new MutationObserver(function(mutations) {
+          // Find any iframes or div elements that might be the chat window
+          const chatElements = document.querySelectorAll('#widget-container + div, #widget-container + iframe');
+          
+          chatElements.forEach(function(chatEl) {
+            // Ensure chat window is properly styled
+            chatEl.style.position = 'fixed';
+            chatEl.style.bottom = '90px';
+            chatEl.style.right = '20px';
+            chatEl.style.zIndex = '9998';
+            
+            // Make sure elements inside the chat receive pointer events
+            const insideElements = chatEl.querySelectorAll('*');
+            insideElements.forEach(el => {
+              el.style.pointerEvents = 'auto';
+            });
+          });
+        });
+        
+        // Start observing for changes in DOM
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true
+        });
+      }, 500);
+    });
+  </script>
 </body>
 </html>
