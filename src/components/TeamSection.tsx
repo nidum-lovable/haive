@@ -59,7 +59,7 @@ const TeamSection = () => {
     />
   ))}
 </div>
-        </div>
+
       </div>
     </section>
   );
