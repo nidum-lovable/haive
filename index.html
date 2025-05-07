@@ -46,7 +46,7 @@
       visibility: visible !important;
       display: block !important;
       transform: none !important;
-      pointer-events: none !important; /* Key: block container from stealing interaction */
+      pointer-events: auto !important;
     }
 
     .haive-widget * {
@@ -95,7 +95,7 @@
             element.style.opacity = '1';
             element.style.visibility = 'visible';
             element.style.display = 'block';
-            element.style.pointerEvents = 'none'; // container does not hijack scroll
+            element.style.pointerEvents = 'auto';
           });
           // Restore inner pointer events
           const innerElements = document.querySelectorAll('.haive-widget *');
