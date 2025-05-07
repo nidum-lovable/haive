@@ -3,7 +3,8 @@ import React from 'react';
 import ButtonCTA from './ui/ButtonCTA';
 
 const Footer = () => {
-  return <footer className="py-10 bg-haive-dark-purple relative border-t border-gray-800">
+  return (
+    <footer className="py-10 bg-haive-dark-purple relative border-t border-gray-800">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
           <div>
@@ -27,8 +28,9 @@ const Footer = () => {
       </div>
       
       {/* Add extra padding at the bottom to ensure no overlap with HaiVE widget */}
-      <div className="pb-32 md:pb-24"></div>
-    </footer>;
+      <div className="pb-40 md:pb-28"></div>
+    </footer>
+  );
 };
 
 export default Footer;
