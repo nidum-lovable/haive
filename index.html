@@ -18,12 +18,19 @@
   <style>
     html, body { 
       height: 100%; 
-      overflow-y: auto !important; 
+      margin: 0;
+      padding: 0;
+      overflow-y: auto !important;
+      overscroll-behavior-y: none;
     }
+    
     body, #root { 
       min-height: 100%;
       position: relative; 
+      overflow-y: auto !important;
     }
+    
+    /* HaiVE Widget Styles */
     .haive-widget, .haive-widget *, .haive-widget + div, .haive-widget + iframe {
       position: fixed !important;
       right: 20px !important;
@@ -35,7 +42,9 @@
       visibility: visible !important;
       display: block !important;
     }
+    
     .haive-widget { bottom: 20px !important; }
+    
     .haive-widget + div, .haive-widget + iframe {
       bottom: 90px !important;
       width: 350px !important;
@@ -45,6 +54,7 @@
       box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
       border-radius: 16px !important;
     }
+    
     @media (max-width:768px) {
       .haive-widget + div, .haive-widget + iframe {
         max-width: 85vw !important;
@@ -56,56 +66,51 @@
 <body>
   <div id="root"></div>
   
-  <!-- HaiVE Widget Script - Placed before other scripts to ensure proper loading -->
-  <script type="text/javascript">
-    // Create a container for the widget
-    document.addEventListener('DOMContentLoaded', function() {
-      // Create widget script dynamically
-      var widgetScript = document.createElement('script');
-      widgetScript.src = "https://widget.haive.tech/widget.iife.js";
-      widgetScript.async = true;
-      widgetScript.className = "haive-widget";
-      widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
-      widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
-      widgetScript.setAttribute('data-assistant_name', 'Sara');
-      document.body.appendChild(widgetScript);
-      
-      // Function to ensure widget stays visible
-      function pinHaiVEWidget() {
-        const loader = document.querySelector('script.haive-widget');
-        if (!loader) return;
-        
-        const widgetRoot = loader.nextElementSibling;
-        [loader, widgetRoot].forEach(el => {
-          if (!el) return;
-          el.style.setProperty('position', 'fixed', 'important');
-          el.style.setProperty('right', '20px', 'important');
-          el.style.setProperty('z-index', '9999', 'important');
-          el.style.setProperty('bottom', el === loader ? '20px' : '90px', 'important');
-          el.style.setProperty('left', 'auto', 'important');
-          el.style.setProperty('top', 'auto', 'important');
-          el.style.setProperty('transform', 'none', 'important');
-          el.style.setProperty('opacity', '1', 'important');
-          el.style.setProperty('visibility', 'visible', 'important');
-          el.style.setProperty('display', 'block', 'important');
-        });
-      }
-      
-      // Run the function after a short delay to ensure widget is loaded
-      setTimeout(pinHaiVEWidget, 2000);
-      
-      // Also run periodically to ensure widget stays visible
-      setInterval(pinHaiVEWidget, 1000);
-      
-      // Setup MutationObserver to detect DOM changes and fix widget positioning
-      new MutationObserver(pinHaiVEWidget).observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-    });
-  </script>
-  
   <script type="module" src="/src/main.tsx"></script>
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  
+  <!-- HaiVE Widget Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        // Create widget script dynamically
+        var widgetScript = document.createElement('script');
+        widgetScript.src = "https://widget.haive.tech/widget.iife.js";
+        widgetScript.async = true;
+        widgetScript.className = "haive-widget";
+        widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
+        widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
+        widgetScript.setAttribute('data-assistant_name', 'Sara');
+        document.body.appendChild(widgetScript);
+        
+        // Create a MutationObserver to monitor DOM changes
+        const observer = new MutationObserver(function(mutations) {
+          const haiveElements = document.querySelectorAll('.haive-widget, .haive-widget + div, .haive-widget + iframe');
+          
+          haiveElements.forEach(el => {
+            if (el) {
+              el.style.setProperty('position', 'fixed', 'important');
+              el.style.setProperty('right', '20px', 'important');
+              el.style.setProperty('z-index', '9999', 'important');
+              el.style.setProperty('bottom', el.className === 'haive-widget' ? '20px' : '90px', 'important');
+              el.style.setProperty('left', 'auto', 'important');
+              el.style.setProperty('top', 'auto', 'important');
+              el.style.setProperty('transform', 'none', 'important');
+              el.style.setProperty('opacity', '1', 'important');
+              el.style.setProperty('visibility', 'visible', 'important');
+              el.style.setProperty('display', 'block', 'important');
+            }
+          });
+        });
+        
+        // Start observing the document
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true
+        });
+      }, 1000); // Delay to ensure DOM is fully loaded
+    });
+  </script>
 </body>
 </html>
