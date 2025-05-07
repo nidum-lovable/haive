@@ -56,7 +56,7 @@ const HowItWorksSection = () => {
             </div>
             <div className="bg-haive-dark-gray rounded-lg overflow-hidden">
               <img 
-                src="/lovable-uploads/55c3e285-4d12-45c8-81e1-92052729b3db.png" 
+                src="/lovable-uploads/e8a013fb-8b20-48b5-ae48-d21dc133ca19.png" 
                 alt="Set up use case" 
                 className="w-full h-auto object-cover"
               />

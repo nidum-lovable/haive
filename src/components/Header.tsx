@@ -36,9 +36,8 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
           <a href="#how-it-works" className="text-gray-300 hover:text-haive-teal transition">How It Works</a>
-          <a href="#integrations" className="text-gray-300 hover:text-haive-teal transition">Integrations</a>
-          <a href="#pricing" className="text-gray-300 hover:text-haive-teal transition">Pricing</a>
-          <a href="#why-haive" className="text-gray-300 hover:text-haive-teal transition">Why HaiVE</a>
+          <a href="#team" className="text-gray-300 hover:text-haive-teal transition">Our Team</a>
+          <a href="#contact" className="text-gray-300 hover:text-haive-teal transition">Contact</a>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -62,25 +61,18 @@ const Header = () => {
               How It Works
             </a>
             <a 
-              href="#integrations" 
+              href="#team" 
               className="text-gray-300 hover:text-haive-teal transition py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Integrations
+              Our Team
             </a>
             <a 
-              href="#pricing" 
+              href="#contact" 
               className="text-gray-300 hover:text-haive-teal transition py-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Pricing
-            </a>
-            <a 
-              href="#why-haive" 
-              className="text-gray-300 hover:text-haive-teal transition py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Why HaiVE
+              Contact
             </a>
           </div>
         </div>
