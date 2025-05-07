@@ -1,51 +1,54 @@
-import { useEffect, useRef } from 'react'
+
+import { useEffect } from 'react';
 
 const HaiVEChatbot = () => {
-  // Keep track of timeouts for proper cleanup
-  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
-  
   useEffect(() => {
     // Function to add the HaiVE script
     const addHaiveScript = () => {
-      // Skip if script already exists
-      if (document.getElementById('haive-script')) return;
-      
+      // Don't add script if it already exists
+      if (document.getElementById('haive-script')) {
+        return;
+      }
+
+      // Create the script element
       const script = document.createElement('script');
       script.id = 'haive-script';
       script.src = 'https://widget.haive.tech/widget.iife.js';
       script.async = true;
+      
+      // Set the required attributes for HaiVE widget
       script.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_95e6c2e7-2909-46cb-bd02-48109a7ae785');
       script.setAttribute('data-phone_number', '17252390568');
       script.setAttribute('data-assistant_name', 'Sara');
       script.setAttribute('data-container', 'haive-widget-container');
       
+      // Append script to the container
       const container = document.getElementById('haive-widget-container');
       if (container) {
         container.appendChild(script);
       }
     };
 
-    // Function to fix pointer events
-    const fixPointerEvents = () => {
-      // Fix widget container
+    // Function to ensure everything is clickable
+    const fixClickability = () => {
+      // Make sure the root and its children are clickable
+      const rootElement = document.getElementById('root');
+      if (rootElement) {
+        rootElement.style.pointerEvents = 'auto';
+      }
+      
+      // Make sure the widget container allows clicks through it except for its children
       const widgetContainer = document.getElementById('haive-widget-container');
-      if (!widgetContainer) return;
-      
-      // Set widget container styles
-      Object.assign(widgetContainer.style, {
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        zIndex: '9999',
-        pointerEvents: 'none' // Allow clicks to pass through container
-      });
-      
-      // Ensure all widget elements are clickable
-      Array.from(widgetContainer.children).forEach(child => {
-        if (child instanceof HTMLElement) {
+      if (widgetContainer) {
+        widgetContainer.style.pointerEvents = 'none';
+        
+        // Make all direct children of the widget container clickable
+        const children = widgetContainer.children;
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i] as HTMLElement;
           child.style.pointerEvents = 'auto';
           
-          // Make all descendants of child clickable
+          // Make all descendants of the child clickable as well
           const descendants = child.querySelectorAll('*');
           descendants.forEach(descendant => {
             if (descendant instanceof HTMLElement) {
@@ -53,77 +56,60 @@ const HaiVEChatbot = () => {
             }
           });
         }
-      });
-      
-      // Ensure body and root elements are clickable
-      document.body.style.pointerEvents = 'auto';
-      const rootElement = document.getElementById('root');
-      if (rootElement) {
-        rootElement.style.pointerEvents = 'auto';
-        
-        // Make all content in root element clickable
-        const rootDescendants = rootElement.querySelectorAll('*');
-        rootDescendants.forEach(element => {
-          if (element instanceof HTMLElement) {
-            element.style.pointerEvents = 'auto';
-          }
-        });
       }
+      
+      // Ensure body is clickable
+      document.body.style.pointerEvents = 'auto';
+      
+      // Make sure all inputs, buttons, links, etc. in the document are clickable
+      const clickableElements = document.querySelectorAll('button, a, input, select, textarea, [role="button"]');
+      clickableElements.forEach(element => {
+        if (element instanceof HTMLElement) {
+          element.style.pointerEvents = 'auto';
+        }
+      });
     };
-    
+
     // Initial setup
     addHaiveScript();
     
-    // Apply fixes immediately and with delays to catch async loading
-    fixPointerEvents();
+    // Fix clickability immediately
+    fixClickability();
     
-    // Set up multiple delayed attempts to ensure widget loads properly
-    const delays = [100, 500, 1000, 2000, 3000, 5000];
-    delays.forEach(delay => {
-      const timeoutId = setTimeout(fixPointerEvents, delay);
-      timeoutsRef.current.push(timeoutId);
+    // Set up a MutationObserver to detect changes to the DOM
+    const observer = new MutationObserver(() => {
+      // When DOM changes, make sure everything is still clickable
+      fixClickability();
     });
     
-    // Set up mutation observer to apply fixes when DOM changes
-    const observer = new MutationObserver((mutations) => {
-      // Apply fixes after any DOM change
-      fixPointerEvents();
-      
-      // Add another delayed fix to ensure changes are caught
-      const timeoutId = setTimeout(fixPointerEvents, 100);
-      timeoutsRef.current.push(timeoutId);
-    });
-    
-    // Observe the widget container with comprehensive config
-    const widgetContainer = document.getElementById('haive-widget-container');
-    if (widgetContainer) {
-      observer.observe(widgetContainer, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['style', 'class'],
-        characterData: true
-      });
-    }
-    
-    // Also observe the body to catch any other relevant changes
+    // Start observing the document with the configured parameters
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class']
     });
     
-    // Cleanup function
+    // Set up multiple delayed attempts to fix clickability (to handle async loading)
+    const timeouts = [
+      setTimeout(fixClickability, 100),
+      setTimeout(fixClickability, 500),
+      setTimeout(fixClickability, 1000),
+      setTimeout(fixClickability, 2000),
+      setTimeout(fixClickability, 5000)
+    ];
+    
+    // Clean up function
     return () => {
       // Disconnect observer
       observer.disconnect();
       
       // Clear all timeouts
-      timeoutsRef.current.forEach(id => clearTimeout(id));
-      timeoutsRef.current = [];
+      timeouts.forEach(timeout => clearTimeout(timeout));
     };
   }, []);
 
-  return null;
+  return null; // This component doesn't render anything
 };
 
 export default HaiVEChatbot;
