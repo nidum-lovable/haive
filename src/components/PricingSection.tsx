@@ -38,7 +38,7 @@ const PricingSection = () => {
   }, []);
   return <section id="pricing" className="py-[5%] bg-black">
       <div className="container mx-auto px-4">
-        <h2 className="section-heading text-center">Pricing</h2>
+        <h2 className="section-heading text-center">Pricin</h2>
         
         <div className="max-w-5xl mx-auto overflow-x-auto">
           <table className="w-full min-w-[600px] border-collapse">

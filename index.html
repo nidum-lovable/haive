@@ -1,114 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>agent-hive-deploy</title>
-  <meta name="description" content="Lovable Generated Project"/>
-  <meta name="author" content="Lovable"/>
-  <meta property="og:title" content="agent-hive-deploy"/>
-  <meta property="og:description" content="Lovable Generated Project"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:site" content="@lovable_dev"/>
-  <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
-  <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png"/>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow-y: auto;
-      /* overscroll-behavior-y: none;  removed to allow nested scrolling */
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+  </head>
+  <body>
+    <div id="root"></div>
 
-    /* HaiVE Widget button */
-    .haive-widget {
-      position: fixed !important;
-      bottom: 20px !important;
-      right: 20px !important;
-      z-index: 9999 !important;
-    }
-
-    /* HaiVE Chat container */
-    .haive-container {
-      position: fixed !important;
-      bottom: 90px !important;
-      right: 20px !important;
-      max-width: 90vw !important;
-      max-height: 600px !important;
-      border-radius: 16px !important;
-      box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
-      pointer-events: auto !important;
-
-      /* re-enable nested scrolling and touch */
-      overscroll-behavior: auto !important;
-      overflow-y: auto !important;
-      -webkit-overflow-scrolling: touch !important;
-      touch-action: auto !important;
-    }
-
-    @media (max-width: 768px) {
-      .haive-container {
-        max-width: 85vw !important;
-        max-height: 60vh !important;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
-  <!-- Your main app script -->
-  <script type="module" src="/src/main.tsx"></script>
-  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-
-  <!-- Improved HaiVE widget loading script -->
-  <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const widgetScript = document.createElement('script');
-        widgetScript.src = "https://widget.haive.tech/widget.iife.js";
-        widgetScript.async = true;
-        widgetScript.className = "haive-widget";
-        widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
-        widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
-        widgetScript.setAttribute('data-assistant_name', 'Sara');
-        document.body.appendChild(widgetScript);
-
-        const enforceWidgetStyle = () => {
-          const widgetButton = document.querySelector('.haive-widget');
-          const chatContainer = document.querySelector('.haive-widget + div, .haive-widget + iframe');
-          if (chatContainer) {
-            chatContainer.classList.add('haive-container');
-            const allElements = chatContainer.querySelectorAll('*');
-            allElements.forEach(element => {
-              element.style.pointerEvents = 'auto';
-            });
-            if (chatContainer.tagName === 'IFRAME') {
-              chatContainer.style.pointerEvents = 'auto';
-            }
-          }
-        };
-
-        setTimeout(enforceWidgetStyle, 1000);
-        setTimeout(enforceWidgetStyle, 2000);
-        setTimeout(enforceWidgetStyle, 3000);
-
-        const observer = new MutationObserver(mutations => {
-          mutations.forEach(mutation => {
-            if (mutation.addedNodes.length) {
-              enforceWidgetStyle();
-            }
-          });
-        });
-
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      }, 500);
-    });
-  </script>
-</body>
+    <!-- GPT Engineer Script -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
