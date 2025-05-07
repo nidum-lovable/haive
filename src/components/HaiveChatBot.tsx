@@ -4,114 +4,141 @@ import { useEffect } from 'react';
 const HaiVEChatbot = () => {
   useEffect(() => {
     // Function to initialize HaiVE widget
-    const initializeHaiVE = () => {
-      // Remove any existing script to prevent duplicates
+    const initializeWidget = () => {
+      // Remove any existing script first
       const existingScript = document.getElementById('haive-script');
       if (existingScript) {
         existingScript.remove();
       }
 
-      // Create and configure new script
+      // Create and add script
       const script = document.createElement('script');
       script.id = 'haive-script';
       script.src = 'https://widget.haive.tech/widget.iife.js';
       script.async = true;
       
-      // Set required attributes
+      // Configure script attributes
       script.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_95e6c2e7-2909-46cb-bd02-48109a7ae785');
       script.setAttribute('data-phone_number', '17252390568');
       script.setAttribute('data-assistant_name', 'Sara');
       script.setAttribute('data-container', 'haive-widget-container');
       
-      // Add to container
-      const container = document.getElementById('haive-widget-container');
-      if (container) {
-        container.appendChild(script);
-      }
+      // Add script to document
+      document.getElementById('haive-widget-container')?.appendChild(script);
     };
 
-    // Function to ensure all elements are clickable
-    const ensureClickability = () => {
-      // Make all elements clickable
-      document.querySelectorAll('*').forEach((element) => {
-        if (element instanceof HTMLElement) {
-          element.style.pointerEvents = 'auto';
+    // Function to make everything clickable
+    const makeEverythingClickable = () => {
+      // Strategy 1: Apply directly to all elements
+      document.querySelectorAll('*').forEach(el => {
+        if (el instanceof HTMLElement) {
+          el.style.setProperty('pointer-events', 'auto', 'important');
         }
       });
       
-      // Special handling for widget container
-      const widgetContainer = document.getElementById('haive-widget-container');
-      if (widgetContainer) {
-        // Add specific styles to ensure widget works
-        widgetContainer.style.pointerEvents = 'auto';
-      }
-
-      // Ensure all buttons, links, and inputs are clickable
-      const clickableElements = document.querySelectorAll('button, a, input, select, textarea, [role="button"]');
-      clickableElements.forEach(element => {
-        if (element instanceof HTMLElement) {
-          element.style.pointerEvents = 'auto';
+      // Strategy 2: Apply to specific elements that are most likely to be unclickable
+      const interactiveElements = document.querySelectorAll(
+        'a, button, input, select, textarea, [role="button"], .clickable, nav *, header *, footer *'
+      );
+      
+      interactiveElements.forEach(el => {
+        if (el instanceof HTMLElement) {
+          el.style.setProperty('pointer-events', 'auto', 'important');
         }
       });
+      
+      // Strategy 3: Make sure HaiVE container is clickable
+      const widgetContainer = document.getElementById('haive-widget-container');
+      if (widgetContainer) {
+        widgetContainer.style.setProperty('pointer-events', 'auto', 'important');
+        widgetContainer.style.zIndex = '9999';
+      }
+      
+      // Strategy 4: Add a global style to ensure everything is clickable
+      let clickabilityStyle = document.getElementById('global-clickability');
+      if (!clickabilityStyle) {
+        clickabilityStyle = document.createElement('style');
+        clickabilityStyle.id = 'global-clickability';
+        clickabilityStyle.textContent = `
+          * {
+            pointer-events: auto !important;
+          }
+          #haive-widget-container, #haive-widget-container * {
+            pointer-events: auto !important;
+            z-index: 9999;
+          }
+        `;
+        document.head.appendChild(clickabilityStyle);
+      }
     };
-
-    // Initialize HaiVE
-    initializeHaiVE();
-
-    // Apply initial clickability
-    ensureClickability();
     
-    // Create a MutationObserver to watch for DOM changes
+    // Initialize HaiVE
+    initializeWidget();
+    
+    // Make everything clickable initially
+    makeEverythingClickable();
+    
+    // Create observer to watch for DOM changes and reapply clickability
     const observer = new MutationObserver(() => {
-      ensureClickability();
+      makeEverythingClickable();
     });
     
-    // Configure observer to watch for changes to the entire document
+    // Start observing the entire document for all types of changes
     observer.observe(document.documentElement, {
       childList: true,
-      subtree: true,
       attributes: true,
+      subtree: true,
       attributeFilter: ['style', 'class']
     });
     
-    // Set up multiple delayed attempts to ensure clickability
-    // This handles async loaded content and widgets
+    // Set multiple timeouts to ensure clickability even after delayed rendering
     const timeouts = [
-      setTimeout(ensureClickability, 100),
-      setTimeout(ensureClickability, 500),
-      setTimeout(ensureClickability, 1000),
-      setTimeout(ensureClickability, 2000),
-      setTimeout(ensureClickability, 5000),
-      setTimeout(ensureClickability, 10000)
+      setTimeout(makeEverythingClickable, 100),
+      setTimeout(makeEverythingClickable, 500),
+      setTimeout(makeEverythingClickable, 1000),
+      setTimeout(makeEverythingClickable, 2000),
+      setTimeout(makeEverythingClickable, 5000)
     ];
-
-    // Add global click handler to diagnose issues
-    const clickHandler = () => {
-      console.log("Document clicked, ensuring clickability");
-      ensureClickability();
-    };
-    document.addEventListener('click', clickHandler);
+    
+    // Add global click event to ensure clickability
+    document.addEventListener('click', () => {
+      makeEverythingClickable();
+    });
+    
+    // Add loadcomplete event for cases where content loads after page load
+    window.addEventListener('load', () => {
+      makeEverythingClickable();
+    });
     
     // Clean up function
     return () => {
-      // Disconnect observer
+      // Remove observer
       observer.disconnect();
       
       // Clear all timeouts
       timeouts.forEach(timeout => clearTimeout(timeout));
       
       // Remove click handler
-      document.removeEventListener('click', clickHandler);
+      document.removeEventListener('click', makeEverythingClickable);
+      
+      // Remove load handler
+      window.removeEventListener('load', makeEverythingClickable);
       
       // Remove script if component unmounts
       const existingScript = document.getElementById('haive-script');
       if (existingScript) {
         existingScript.remove();
       }
+      
+      // Remove style
+      const clickabilityStyle = document.getElementById('global-clickability');
+      if (clickabilityStyle) {
+        clickabilityStyle.remove();
+      }
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
-  return null; // This component doesn't render anything
+  return null; // This component doesn't render anything visible
 };
 
 export default HaiVEChatbot;

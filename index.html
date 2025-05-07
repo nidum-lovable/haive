@@ -6,9 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HaiVE</title>
     <style>
-      /* Reset styles for clickability */
-      html, body, #root, #root * {
+      /* Global clickability reset */
+      * {
         pointer-events: auto !important;
+      }
+      
+      body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      
+      #root {
+        height: 100%;
+        position: relative;
+        z-index: 1;
       }
       
       /* HaiVE widget container */
@@ -17,23 +30,23 @@
         bottom: 20px;
         right: 20px;
         z-index: 9999;
+        pointer-events: auto !important;
       }
       
-      /* Ensure dialog elements remain on top */
+      /* Make sure modals and dialogs stay on top */
       [role="dialog"],
       [role="alertdialog"],
       .modal,
-      .popover,
-      .dropdown {
+      .dropdown,
+      .popover {
         z-index: 9999;
-        pointer-events: auto !important;
       }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <div id="haive-widget-container"></div>
-
+    
     <!-- GPT Engineer Script -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
