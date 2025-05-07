@@ -4,7 +4,7 @@ import ButtonCTA from './ui/ButtonCTA';
 
 const HeroSection = () => {
   return (
-    <section className="flex items-center justify-center relative overflow-hidden" id="hero">
+    <section className="flex items-center justify-center relative overflow-hidden min-h-screen" id="hero">
       {/* Gradient Hive Backdrop */}
       <div className="absolute inset-0 bg-gradient-to-b from-haive-dark-purple to-haive-dark opacity-70 z-0" />
       

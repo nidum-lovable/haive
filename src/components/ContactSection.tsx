@@ -6,7 +6,7 @@ const ContactSection = () => {
   const locations = [
     {
       country: 'Singapore',
-      image: '/lovable-uploads/6c069a4e-c770-41a0-b6de-e60b831ba217.png',
+      image: '/lovable-uploads/d9b2545c-1c81-4376-b0ab-2edd94d50d4d.png',
       address: [
         'No. 2 Venture Drive',
         '#09-24 Vision Exchange',
@@ -38,7 +38,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-haive-dark-purple">
+    <section id="contact" className="py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-white mb-16">Get In Touch</h2>
         
