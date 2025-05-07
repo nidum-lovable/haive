@@ -41,6 +41,7 @@
       opacity: 1 !important;
       visibility: visible !important;
       display: block !important;
+    pointer-events: auto !important;
     }
     
     .haive-widget { bottom: 20px !important; }
@@ -53,6 +54,7 @@
       overflow: hidden !important;
       box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
       border-radius: 16px !important;
+      pointer-events: none !important;
     }
     
     @media (max-width:768px) {
@@ -99,6 +101,8 @@
               el.style.setProperty('opacity', '1', 'important');
               el.style.setProperty('visibility', 'visible', 'important');
               el.style.setProperty('display', 'block', 'important');
+              el.style.setProperty('pointer-events', 'auto', 'important');
+
             }
           });
         });
