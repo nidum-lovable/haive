@@ -8,7 +8,6 @@ import ContactSection from '@/components/ContactSection';
 import TechBadgesSection from '@/components/TechBadgesSection';
 import IntegrationsSection from '@/components/IntegrationsSection';
 import FAQsSection from '@/components/FAQsSection';
-import HowItWorksSection from '@/components/HowItWorksSection';
 
 const Index = () => {
   // Effect to ensure the widget is properly initialized and visible
@@ -74,7 +73,6 @@ const Index = () => {
           </div>
         </section>
         
-        <HowItWorksSection />
         <WhyOnPremiseAISection />
         <WhyHaiveSection />
         <PricingSection />
