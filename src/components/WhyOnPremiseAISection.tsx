@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Shield, LockClosed, Coins, LightningBolt, Cog } from 'lucide-react';
+import { Shield, Lock, Coins, Zap, Cog } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 type ReasonCardProps = {
   icon: React.ElementType;
   title: string;
-  description: string;
+  description: React.ReactNode;
   iconLabel: string;
   delay: number;
 };
@@ -79,7 +79,7 @@ const WhyOnPremiseAISection = () => {
       iconLabel: "Data Sovereignty Icon",
     },
     {
-      icon: LockClosed,
+      icon: Lock,
       title: "Zero Cloud Leaks",
       description: "Your models run behind your firewall, not a public endpoint.",
       iconLabel: "Zero Cloud Leaks Icon",
@@ -91,7 +91,7 @@ const WhyOnPremiseAISection = () => {
       iconLabel: "Predictable Bills Icon",
     },
     {
-      icon: LightningBolt,
+      icon: Zap,
       title: "Ultra-Low Latency",
       description: "< 50ms round-trip = real-time voice, vision, robotics.",
       iconLabel: "Ultra-Low Latency Icon",
