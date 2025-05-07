@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const pressItems = [
@@ -45,21 +46,21 @@ const InThePressSection = () => {
           {pressItems.slice(0, 3).map((item, index) => (
             <div 
               key={index}
-              className={`flex justify-center items-center hover:opacity-80 transition-opacity h-36 ${item.publication === "INDIAi" ? "h-48" : ""}`}
+              className={`flex justify-center items-center hover:opacity-80 transition-opacity h-36 ${item.publication === "INDIAi" ? "h-96" : ""}`}
             >
               {item.link ? (
                 <a href={item.link} target="_blank" rel="noopener noreferrer" className="block h-full flex items-center">
                   <img 
                     src={item.logo} 
                     alt={item.publication}
-                    className={`max-w-full object-contain ${item.publication === "INDIAi" ? "max-h-48" : "max-h-32"}`} 
+                    className={`max-w-full object-contain ${item.publication === "INDIAi" ? "max-h-96" : "max-h-32"}`} 
                   />
                 </a>
               ) : (
                 <img 
                   src={item.logo} 
                   alt={item.publication}
-                  className={`max-w-full object-contain ${item.publication === "INDIAi" ? "max-h-48" : "max-h-32"}`} 
+                  className={`max-w-full object-contain ${item.publication === "INDIAi" ? "max-h-96" : "max-h-32"}`} 
                 />
               )}
             </div>
