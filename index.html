@@ -16,39 +16,51 @@
   <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
   <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png"/>
   <style>
-    html, body { 
-      height: 100%; 
-      overflow-y: auto !important; 
+    html {
+      height: 100%;
+      overflow-y: auto !important;
     }
-    body, #root { 
+    
+    body { 
+      height: 100%;
+      position: relative;
+      overflow-y: auto !important;
+      padding-right: 0 !important;
+      margin-right: 0 !important;
+    }
+    
+    #root {
       min-height: 100%;
-      position: relative; 
+      position: relative;
+      z-index: 1;
     }
-    .haive-widget, .haive-widget + div, .haive-widget + iframe {
-      position: fixed !important;
-      right: 20px !important;
-      z-index: 9999 !important;
-      transform: none !important;
-      left: auto !important;
-      top: auto !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      display: block !important;
+    
+    /* HaiVE Widget styling */
+    .haive-widget-container {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 9999;
+      display: block;
     }
-    .haive-widget { bottom: 20px !important; }
-    .haive-widget + div, .haive-widget + iframe {
-      bottom: 90px !important;
-      width: 350px !important;
-      max-width: 90vw !important;
-      max-height: 600px !important;
-      overflow: hidden !important;
-      box-shadow: 0 5px 40px rgba(0,0,0,0.16) !important;
-      border-radius: 16px !important;
+    
+    .haive-widget-content {
+      position: fixed;
+      right: 20px;
+      bottom: 90px;
+      width: 350px;
+      max-width: 90vw;
+      max-height: 600px;
+      overflow: hidden;
+      box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+      border-radius: 16px;
+      z-index: 9998;
     }
+    
     @media (max-width:768px) {
-      .haive-widget + div, .haive-widget + iframe {
-        max-width: 85vw !important;
-        max-height: 60vh !important;
+      .haive-widget-content {
+        max-width: 85vw;
+        max-height: 60vh;
       }
     }
   </style>
@@ -56,49 +68,45 @@
 <body>
   <div id="root"></div>
   
-  <!-- HaiVE Widget Script - Placed before other scripts to ensure proper loading -->
+  <div id="haive-widget-container" class="haive-widget-container"></div>
+
   <script type="text/javascript">
-    // Create a container for the widget
     document.addEventListener('DOMContentLoaded', function() {
-      // Create widget script dynamically
-      var widgetScript = document.createElement('script');
+      // Create a container for HaiVE widget
+      const container = document.getElementById('haive-widget-container');
+      
+      // Create and append the widget script
+      const widgetScript = document.createElement('script');
       widgetScript.src = "https://widget.haive.tech/widget.iife.js";
       widgetScript.async = true;
       widgetScript.className = "haive-widget";
       widgetScript.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e');
       widgetScript.setAttribute('data-phone_number', '6XHPXCcYFelxHXcQ');
       widgetScript.setAttribute('data-assistant_name', 'Sara');
-      document.body.appendChild(widgetScript);
+      container.appendChild(widgetScript);
       
-      // Function to ensure widget stays visible
-      function pinHaiVEWidget() {
-        const loader = document.querySelector('script.haive-widget');
-        if (!loader) return;
+      // Function to ensure proper positioning of widget content
+      function maintainWidgetPosition() {
+        // Find the widget and its content
+        const widgetScript = document.querySelector('script.haive-widget');
+        if (!widgetScript) return;
         
-        const widgetRoot = loader.nextElementSibling;
-        [loader, widgetRoot].forEach(el => {
-          if (!el) return;
-          el.style.setProperty('position', 'fixed', 'important');
-          el.style.setProperty('right', '20px', 'important');
-          el.style.setProperty('z-index', '9999', 'important');
-          el.style.setProperty('bottom', el === loader ? '20px' : '90px', 'important');
-          el.style.setProperty('left', 'auto', 'important');
-          el.style.setProperty('top', 'auto', 'important');
-          el.style.setProperty('transform', 'none', 'important');
-          el.style.setProperty('opacity', '1', 'important');
-          el.style.setProperty('visibility', 'visible', 'important');
-          el.style.setProperty('display', 'block', 'important');
-        });
+        // Apply styling to the next sibling (widget content)
+        const widgetContent = widgetScript.nextElementSibling;
+        if (widgetContent && widgetContent !== container) {
+          widgetContent.classList.add('haive-widget-content');
+        }
       }
       
-      // Run the function after a short delay to ensure widget is loaded
-      setTimeout(pinHaiVEWidget, 2000);
+      // Run maintainWidgetPosition after a delay to ensure widget has loaded
+      setTimeout(maintainWidgetPosition, 2000);
       
-      // Also run periodically to ensure widget stays visible
-      setInterval(pinHaiVEWidget, 1000);
+      // Run periodically to ensure widget position is maintained
+      const positionInterval = setInterval(maintainWidgetPosition, 1000);
       
-      // Setup MutationObserver to detect DOM changes and fix widget positioning
-      new MutationObserver(pinHaiVEWidget).observe(document.body, {
+      // Also use MutationObserver to detect DOM changes
+      const observer = new MutationObserver(maintainWidgetPosition);
+      observer.observe(document.body, {
         childList: true,
         subtree: true
       });
