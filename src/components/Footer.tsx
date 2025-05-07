@@ -14,10 +14,7 @@ const Footer = () => {
                 alt="HaiVE Logo" 
                 className="h-10 w-auto mr-2"
               />
-              <h1 className="text-2xl font-bold">
-                <span className="text-haive-orange">Hai</span>
-                <span className="text-white">VE</span>
-              </h1>
+              <h1 className="text-2xl font-bold text-white">HaiVE</h1>
             </div>
             <p className="text-gray-400 text-sm mt-1">Deploy AI agents that work.</p>
           </div>
