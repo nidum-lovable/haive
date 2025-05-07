@@ -21,10 +21,10 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path='*' element={<NotFound />} />
         </Routes>
-        
-        {/* HaiVE Chatbot added here */}
-        <HaiVEChatbot />
       </BrowserRouter>
+      
+      {/* HaiVE Chatbot added here outside the router */}
+      <HaiVEChatbot />
     </TooltipProvider>
   </QueryClientProvider>
 )

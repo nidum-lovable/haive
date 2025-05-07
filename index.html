@@ -21,20 +21,25 @@
       
       /* HaiVE widget container */
       #haive-widget-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 999;
-        pointer-events: none;
-        width: auto;
-        height: auto;
-        max-width: 500px;
-        min-width: 60px;
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 9999 !important;
+        pointer-events: none !important;
+        width: auto !important;
+        height: auto !important;
+        max-width: 500px !important;
+        min-width: 60px !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       /* Only the actual widget content receives pointer events */
       #haive-widget-container > * {
-        pointer-events: auto;
+        pointer-events: auto !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       /* Ensure dialogs, modals stay on top */

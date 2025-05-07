@@ -36,51 +36,80 @@ const HaiVEChatbot = () => {
       }
     };
 
-    // Initialize HaiVE with a small delay to ensure DOM is fully loaded
-    setTimeout(() => {
-      initializeWidget();
-    }, 1000);
-    
-    // Add some basic styling to ensure widget container is visible
-    const ensureWidgetContainerStyle = () => {
-      const container = document.getElementById('haive-widget-container');
-      if (container) {
-        container.style.position = 'fixed';
-        container.style.bottom = '20px';
-        container.style.right = '20px';
-        container.style.zIndex = '999';
-        container.style.width = 'auto';
-        container.style.height = 'auto';
-        container.style.pointerEvents = 'none';
+    // Make sure container exists and is properly styled before initializing
+    const setupContainer = () => {
+      let container = document.getElementById('haive-widget-container');
+      
+      // Create container if it doesn't exist
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'haive-widget-container';
+        document.body.appendChild(container);
       }
+      
+      // Apply critical styles directly to the container
+      container.style.position = 'fixed';
+      container.style.bottom = '20px';
+      container.style.right = '20px';
+      container.style.zIndex = '999';
+      container.style.pointerEvents = 'none';
+      container.style.width = 'auto';
+      container.style.height = 'auto';
+      container.style.maxWidth = '500px';
+      container.style.minWidth = '60px';
+      container.style.display = 'block';
+      container.style.visibility = 'visible';
+      container.style.opacity = '1';
+      
+      return container;
+    };
+
+    // Initialize with a sequence of timed attempts to ensure proper loading
+    const setup = () => {
+      const container = setupContainer();
+      
+      // First attempt - immediate
+      initializeWidget();
+      
+      // Second attempt - after short delay
+      setTimeout(() => {
+        setupContainer();
+        initializeWidget();
+      }, 1000);
+      
+      // Third attempt - after longer delay
+      setTimeout(() => {
+        setupContainer();
+        initializeWidget();
+      }, 3000);
+      
+      // Set up an observer to monitor widget container changes
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.addedNodes.length) {
+            // Make sure all direct children of the container have pointer-events auto
+            const container = document.getElementById('haive-widget-container');
+            if (container) {
+              Array.from(container.children).forEach(child => {
+                if (child instanceof HTMLElement) {
+                  child.style.pointerEvents = 'auto';
+                  child.style.visibility = 'visible';
+                  child.style.opacity = '1';
+                }
+              });
+            }
+          }
+        });
+      });
+      
+      // Start observing the container
+      observer.observe(container, { childList: true, subtree: true });
+      
+      return observer;
     };
     
-    // Apply styles immediately and after a delay
-    ensureWidgetContainerStyle();
-    setTimeout(ensureWidgetContainerStyle, 1500);
-    
-    // Set up an observer to detect when widget elements are added to the container
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.addedNodes.length) {
-          // Make sure all direct children of the container have pointer-events auto
-          const container = document.getElementById('haive-widget-container');
-          if (container) {
-            Array.from(container.children).forEach(child => {
-              if (child instanceof HTMLElement) {
-                child.style.pointerEvents = 'auto';
-              }
-            });
-          }
-        }
-      });
-    });
-    
-    // Start observing the container if it exists
-    const container = document.getElementById('haive-widget-container');
-    if (container) {
-      observer.observe(container, { childList: true, subtree: true });
-    }
+    // Run the setup
+    const observer = setup();
     
     // Clean up function
     return () => {
