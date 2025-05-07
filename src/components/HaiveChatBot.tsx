@@ -5,7 +5,9 @@ const HaiVEChatbot = () => {
   useEffect(() => {
     // Function to initialize HaiVE widget
     const initializeWidget = () => {
-      // Remove any existing script first
+      console.log("Initializing HaiVE widget...");
+      
+      // Remove any existing script first to prevent duplicates
       const existingScript = document.getElementById('haive-script');
       if (existingScript) {
         existingScript.remove();
@@ -24,76 +26,65 @@ const HaiVEChatbot = () => {
       script.setAttribute('data-container', 'haive-widget-container');
       
       // Add script to document
-      document.getElementById('haive-widget-container')?.appendChild(script);
+      const container = document.getElementById('haive-widget-container');
+      if (container) {
+        console.log("Widget container found, appending script");
+        container.appendChild(script);
+      } else {
+        console.log("Widget container not found, adding to body");
+        document.body.appendChild(script);
+      }
     };
 
-    // Initialize HaiVE
-    initializeWidget();
+    // Initialize HaiVE with a small delay to ensure DOM is fully loaded
+    setTimeout(() => {
+      initializeWidget();
+    }, 1000);
     
-    // Fix any potential z-index issues with the chat widget
-    const fixChatWidgetLayout = () => {
-      // Find the widget container
-      const widgetContainer = document.getElementById('haive-widget-container');
-      if (!widgetContainer) return;
-      
-      // Check for any full-screen/fixed position elements within the widget
-      const fixedElements = widgetContainer.querySelectorAll('.fixed, [class*="fixed"], [style*="position: fixed"]');
-      fixedElements.forEach(el => {
-        if (el instanceof HTMLElement) {
-          // Ensure these elements don't have full inset that blocks the entire UI
-          if (el.style.inset === '0px' || el.classList.contains('inset-0')) {
-            el.style.inset = 'auto';
-            el.style.position = 'relative';
-          }
-          
-          // Ensure z-index is appropriate
-          if (parseInt(el.style.zIndex || '0') > 1000) {
-            el.style.zIndex = '999';
-          }
-        }
-      });
-      
-      // Ensure chat button stays in bottom right
-      const chatButton = widgetContainer.querySelector('button');
-      if (chatButton instanceof HTMLElement && !chatButton.style.position) {
-        chatButton.style.position = 'fixed';
-        chatButton.style.bottom = '20px';
-        chatButton.style.right = '20px';
+    // Add some basic styling to ensure widget container is visible
+    const ensureWidgetContainerStyle = () => {
+      const container = document.getElementById('haive-widget-container');
+      if (container) {
+        container.style.position = 'fixed';
+        container.style.bottom = '20px';
+        container.style.right = '20px';
+        container.style.zIndex = '999';
+        container.style.width = 'auto';
+        container.style.height = 'auto';
+        container.style.pointerEvents = 'none';
       }
     };
     
-    // Run the fix immediately and after a delay to catch dynamically loaded content
-    fixChatWidgetLayout();
-    const timeoutIds = [
-      setTimeout(fixChatWidgetLayout, 1000),
-      setTimeout(fixChatWidgetLayout, 2000)
-    ];
+    // Apply styles immediately and after a delay
+    ensureWidgetContainerStyle();
+    setTimeout(ensureWidgetContainerStyle, 1500);
     
-    // Set up an observer to monitor for DOM changes in the widget container
-    const observer = new MutationObserver(() => {
-      fixChatWidgetLayout();
+    // Set up an observer to detect when widget elements are added to the container
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length) {
+          // Make sure all direct children of the container have pointer-events auto
+          const container = document.getElementById('haive-widget-container');
+          if (container) {
+            Array.from(container.children).forEach(child => {
+              if (child instanceof HTMLElement) {
+                child.style.pointerEvents = 'auto';
+              }
+            });
+          }
+        }
+      });
     });
     
-    // Start observing once the container exists
-    const widgetContainer = document.getElementById('haive-widget-container');
-    if (widgetContainer) {
-      observer.observe(widgetContainer, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['style', 'class']
-      });
+    // Start observing the container if it exists
+    const container = document.getElementById('haive-widget-container');
+    if (container) {
+      observer.observe(container, { childList: true, subtree: true });
     }
     
     // Clean up function
     return () => {
-      // Remove observer
       observer.disconnect();
-      
-      // Clear all timeouts
-      timeoutIds.forEach(id => clearTimeout(id));
-      
-      // Remove script if component unmounts
       const existingScript = document.getElementById('haive-script');
       if (existingScript) {
         existingScript.remove();

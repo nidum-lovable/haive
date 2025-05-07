@@ -19,13 +19,17 @@
         z-index: 1;
       }
       
-      /* HaiVE widget container - positioned in bottom right corner */
+      /* HaiVE widget container */
       #haive-widget-container {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        z-index: 999; /* High but not blocking other UI */
-        pointer-events: none; /* Container itself doesn't block clicks */
+        z-index: 999;
+        pointer-events: none;
+        width: auto;
+        height: auto;
+        max-width: 500px;
+        min-width: 60px;
       }
       
       /* Only the actual widget content receives pointer events */
@@ -45,7 +49,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <div id="haive-widget-container"></div>
+    <div id="haive-widget-container" aria-live="polite"></div>
     
     <!-- GPT Engineer Script -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
