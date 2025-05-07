@@ -16,8 +16,9 @@ const pressItems = [
   },
   {
     publication: "Financial Express",
-    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
-    position: "top-right"
+    logo: "/lovable-uploads/5f8968d2-74c4-4809-9bd3-ed470d7e756b.png",
+    position: "top-right",
+    link: "https://www.financialexpress.com/business/digital-transformation-haive-introduces-self-hosted-multi-role-ai-assistantnbsp-3372568/"
   },
   {
     publication: "AIM",
