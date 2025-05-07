@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Shield, CloudOff, DollarSign, Clock, Settings } from 'lucide-react';
+import { Shield, CloudOff, DollarSign, Clock, Settings, Lock } from 'lucide-react';
 
 const features = [
   {
@@ -27,6 +26,11 @@ const features = [
     title: "Full Control",
     description: "Swap models, fine-tune offline, and avoid vendor lock-in.",
     icon: Settings
+  },
+  {
+    title: "Enhanced Security",
+    description: "Keep your AI models protected behind your enterprise security infrastructure.",
+    icon: Lock
   }
 ];
 
