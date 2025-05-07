@@ -1,5 +1,4 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
-  <rect width="60" height="60" fill="none"/>
-  <text x="30" y="30" font-family="Arial" font-size="8" text-anchor="middle" dominant-baseline="middle" fill="#00E5C9">Twilio</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="60" height="60">
+  <path fill="#00E5C9" d="M50,15c-19.33,0-35,15.67-35,35s15.67,35,35,35s35-15.67,35-35S69.33,15,50,15z M40,60c-5.52,0-10-4.48-10-10s4.48-10,10-10s10,4.48,10,10S45.52,60,40,60z M60,60c-5.52,0-10-4.48-10-10s4.48-10,10-10s10,4.48,10,10S65.52,60,60,60z M60,40c-5.52,0-10-4.48-10-10s4.48-10,10-10s10,4.48,10,10S65.52,40,60,40z M40,40c-5.52,0-10-4.48-10-10s4.48-10,10-10s10,4.48,10,10S45.52,40,40,40z"/>
 </svg>

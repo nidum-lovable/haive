@@ -27,9 +27,9 @@ const Index = () => {
         <WhyHaiveSection />
         <PricingSection />
         <TeamSection />
-        <TechBadgesSection /> {/* In the Press section */}
-        <IntegrationsSection /> {/* FAQs section placeholder */}
-        <ContactSection /> {/* Get in touch & Contact Section combined */}
+        <TechBadgesSection />
+        <IntegrationsSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>

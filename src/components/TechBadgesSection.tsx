@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Shield, Cpu, Database, FileJson, Globe, ServerCog, CheckCircle } from 'lucide-react';
 type TechBadge = {
@@ -40,7 +41,7 @@ const badges: TechBadge[] = [{
   description: "Easy integration with existing systems"
 }];
 const TechBadgesSection = () => {
-  return <section className="py-12">
+  return <section className="py-[5%] bg-black">
       <div className="container mx-auto px-4">
         <h2 className="section-heading text-center mb-12">Technology & Compliance</h2>
         

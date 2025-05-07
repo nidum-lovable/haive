@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Database, TrendingDown, Cpu } from 'lucide-react';
 const features = [{
@@ -14,7 +15,7 @@ const features = [{
   icon: Cpu
 }];
 const WhyHaiveSection = () => {
-  return <section id="why-haive" className="pt-32 pb-32 bg-haive-dark">
+  return <section id="why-haive" className="py-[5%] bg-black">
       <div className="container mx-auto px-4">
         <h2 className="section-heading text-center">Why HaiVE</h2>
         

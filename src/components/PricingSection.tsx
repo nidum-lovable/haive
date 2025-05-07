@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
 const pricingData = [{
@@ -35,7 +36,7 @@ const PricingSection = () => {
     }, 2500);
     return () => clearInterval(interval);
   }, []);
-  return <section id="pricing" className="py-20 ">
+  return <section id="pricing" className="py-[5%] bg-black">
       <div className="container mx-auto px-4">
         <h2 className="section-heading text-center">Pricing</h2>
         

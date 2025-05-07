@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { Shield, CloudOff, DollarSign, Clock, Settings, Play } from 'lucide-react';
 import ButtonCTA from './ui/ButtonCTA';
 const WhyOnPremiseAISection = () => {
-  return <section id="why-on-prem-ai" className="py-0 relative overflow-hidden">
+  return <section id="why-on-prem-ai" className="py-[5%] bg-black relative overflow-hidden">
       <div className="container mx-auto px-4">
         <h2 className="section-heading text-center">Why On-Premise AI?</h2>
         
@@ -59,18 +60,17 @@ const WhyOnPremiseAISection = () => {
             </div>
             
             <div className="p-6 rounded-xl bg-haive-dark-gray border border-haive-orange/20 hover:border-haive-orange/50 transition-all duration-300 flex flex-col">
-              <div>
+              <div className="w-full">
                 <div className="flex items-center mb-4">
                   <div className="p-2 rounded-full bg-haive-orange/10 mr-3">
                     <Play className="text-haive-orange h-5 w-5" />
                   </div>
                   <h3 className="text-xl font-bold text-white">See HaiVE in action</h3>
                 </div>
-                <p className="text-gray-300 mb-4">
+                <p className="text-gray-300 mb-4 w-full">
                   Experience the power and flexibility of on-premise AI firsthand.
                 </p>
               </div>
-              
             </div>
           </div>
         </div>
