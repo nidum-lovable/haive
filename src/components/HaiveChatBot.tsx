@@ -3,65 +3,50 @@ import { useEffect } from 'react';
 
 const HaiVEChatbot = () => {
   useEffect(() => {
-    // Function to add the HaiVE script
-    const addHaiveScript = () => {
-      // Don't add script if it already exists
-      if (document.getElementById('haive-script')) {
-        return;
+    // Function to initialize HaiVE widget
+    const initializeHaiVE = () => {
+      // Remove any existing script to prevent duplicates
+      const existingScript = document.getElementById('haive-script');
+      if (existingScript) {
+        existingScript.remove();
       }
 
-      // Create the script element
+      // Create and configure new script
       const script = document.createElement('script');
       script.id = 'haive-script';
       script.src = 'https://widget.haive.tech/widget.iife.js';
       script.async = true;
       
-      // Set the required attributes for HaiVE widget
+      // Set required attributes
       script.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_95e6c2e7-2909-46cb-bd02-48109a7ae785');
       script.setAttribute('data-phone_number', '17252390568');
       script.setAttribute('data-assistant_name', 'Sara');
       script.setAttribute('data-container', 'haive-widget-container');
       
-      // Append script to the container
+      // Add to container
       const container = document.getElementById('haive-widget-container');
       if (container) {
         container.appendChild(script);
       }
     };
 
-    // Function to ensure everything is clickable
-    const fixClickability = () => {
-      // Make sure the root and its children are clickable
-      const rootElement = document.getElementById('root');
-      if (rootElement) {
-        rootElement.style.pointerEvents = 'auto';
-      }
+    // Function to ensure all elements are clickable
+    const ensureClickability = () => {
+      // Make all elements clickable
+      document.querySelectorAll('*').forEach((element) => {
+        if (element instanceof HTMLElement) {
+          element.style.pointerEvents = 'auto';
+        }
+      });
       
-      // Make sure the widget container allows clicks through it except for its children
+      // Special handling for widget container
       const widgetContainer = document.getElementById('haive-widget-container');
       if (widgetContainer) {
-        widgetContainer.style.pointerEvents = 'none';
-        
-        // Make all direct children of the widget container clickable
-        const children = widgetContainer.children;
-        for (let i = 0; i < children.length; i++) {
-          const child = children[i] as HTMLElement;
-          child.style.pointerEvents = 'auto';
-          
-          // Make all descendants of the child clickable as well
-          const descendants = child.querySelectorAll('*');
-          descendants.forEach(descendant => {
-            if (descendant instanceof HTMLElement) {
-              descendant.style.pointerEvents = 'auto';
-            }
-          });
-        }
+        // Add specific styles to ensure widget works
+        widgetContainer.style.pointerEvents = 'auto';
       }
-      
-      // Ensure body is clickable
-      document.body.style.pointerEvents = 'auto';
-      
-      // Make sure all inputs, buttons, links, etc. in the document are clickable
+
+      // Ensure all buttons, links, and inputs are clickable
       const clickableElements = document.querySelectorAll('button, a, input, select, textarea, [role="button"]');
       clickableElements.forEach(element => {
         if (element instanceof HTMLElement) {
@@ -70,34 +55,42 @@ const HaiVEChatbot = () => {
       });
     };
 
-    // Initial setup
-    addHaiveScript();
+    // Initialize HaiVE
+    initializeHaiVE();
+
+    // Apply initial clickability
+    ensureClickability();
     
-    // Fix clickability immediately
-    fixClickability();
-    
-    // Set up a MutationObserver to detect changes to the DOM
+    // Create a MutationObserver to watch for DOM changes
     const observer = new MutationObserver(() => {
-      // When DOM changes, make sure everything is still clickable
-      fixClickability();
+      ensureClickability();
     });
     
-    // Start observing the document with the configured parameters
-    observer.observe(document.body, {
+    // Configure observer to watch for changes to the entire document
+    observer.observe(document.documentElement, {
       childList: true,
       subtree: true,
       attributes: true,
       attributeFilter: ['style', 'class']
     });
     
-    // Set up multiple delayed attempts to fix clickability (to handle async loading)
+    // Set up multiple delayed attempts to ensure clickability
+    // This handles async loaded content and widgets
     const timeouts = [
-      setTimeout(fixClickability, 100),
-      setTimeout(fixClickability, 500),
-      setTimeout(fixClickability, 1000),
-      setTimeout(fixClickability, 2000),
-      setTimeout(fixClickability, 5000)
+      setTimeout(ensureClickability, 100),
+      setTimeout(ensureClickability, 500),
+      setTimeout(ensureClickability, 1000),
+      setTimeout(ensureClickability, 2000),
+      setTimeout(ensureClickability, 5000),
+      setTimeout(ensureClickability, 10000)
     ];
+
+    // Add global click handler to diagnose issues
+    const clickHandler = () => {
+      console.log("Document clicked, ensuring clickability");
+      ensureClickability();
+    };
+    document.addEventListener('click', clickHandler);
     
     // Clean up function
     return () => {
@@ -106,8 +99,17 @@ const HaiVEChatbot = () => {
       
       // Clear all timeouts
       timeouts.forEach(timeout => clearTimeout(timeout));
+      
+      // Remove click handler
+      document.removeEventListener('click', clickHandler);
+      
+      // Remove script if component unmounts
+      const existingScript = document.getElementById('haive-script');
+      if (existingScript) {
+        existingScript.remove();
+      }
     };
-  }, []);
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return null; // This component doesn't render anything
 };

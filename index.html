@@ -4,27 +4,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome</title>
+    <title>HaiVE</title>
     <style>
-      /* Basic reset to ensure proper clickability */
+      /* Reset styles for clickability */
       html, body, #root, #root * {
-        pointer-events: auto;
+        pointer-events: auto !important;
       }
       
-      /* Simplified widget container styling */
+      /* HaiVE widget container */
       #haive-widget-container {
         position: fixed;
         bottom: 20px;
         right: 20px;
         z-index: 9999;
-        pointer-events: none;
       }
       
-      /* Any element inside the widget container should be clickable */
-      #haive-widget-container > div,
-      #haive-widget-container iframe,
-      #haive-widget-container button {
-        pointer-events: auto;
+      /* Ensure dialog elements remain on top */
+      [role="dialog"],
+      [role="alertdialog"],
+      .modal,
+      .popover,
+      .dropdown {
+        z-index: 9999;
+        pointer-events: auto !important;
       }
     </style>
   </head>
