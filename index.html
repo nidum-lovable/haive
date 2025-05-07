@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,9 +50,36 @@
   <div id="root"></div>
   <script async src="https://widget.haive.tech/widget.iife.js" data-id="e0cba082-be1e-4d12-88d9-b1f3c3eeafba_63767a13-c85c-4ede-b29f-c8691628025e" data-phone_number="6XHPXCcYFelxHXcQ" data-assistant_name="Sara" class="haive-widget"></script>
   <script>
-    function pinHaiVEWidget(){const loader=document.querySelector('script.haive-widget');if(!loader)return;const widgetRoot=loader.nextElementSibling;[loader,widgetRoot].forEach(el=>{if(!el)return;el.style.setProperty('position','fixed','important');el.style.setProperty('right','20px','important');el.style.setProperty('z-index','9999','important');el.style.setProperty('bottom',el===loader?'20px':'90px','important');el.style.setProperty('left','auto','important');el.style.setProperty('top','auto','important');el.style.setProperty('transform','none','important');el.style.setProperty('opacity','1','important');el.style.setProperty('visibility','visible','important');el.style.setProperty('display','block','important');});}
-    window.addEventListener('load',pinHaiVEWidget);
-    new MutationObserver(pinHaiVEWidget).observe(document.body,{childList:true,subtree:true});
+    function pinHaiVEWidget() {
+      const loader = document.querySelector('script.haive-widget');
+      if (!loader) return;
+      const widgetRoot = loader.nextElementSibling;
+      [loader, widgetRoot].forEach(el => {
+        if (!el) return;
+        el.style.setProperty('position', 'fixed', 'important');
+        el.style.setProperty('right', '20px', 'important');
+        el.style.setProperty('z-index', '9999', 'important');
+        el.style.setProperty('bottom', el === loader ? '20px' : '90px', 'important');
+        el.style.setProperty('left', 'auto', 'important');
+        el.style.setProperty('top', 'auto', 'important');
+        el.style.setProperty('transform', 'none', 'important');
+        el.style.setProperty('opacity', '1', 'important');
+        el.style.setProperty('visibility', 'visible', 'important');
+        el.style.setProperty('display', 'block', 'important');
+      });
+    }
+    
+    // Execute the function after page load
+    window.addEventListener('load', pinHaiVEWidget);
+    
+    // Also run periodically to ensure widget stays visible
+    setInterval(pinHaiVEWidget, 1000);
+    
+    // Setup MutationObserver to detect DOM changes and fix widget positioning
+    new MutationObserver(pinHaiVEWidget).observe(document.body, {
+      childList: true,
+      subtree: true
+    });
   </script>
   <script type="module" src="/src/main.tsx"></script>
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
