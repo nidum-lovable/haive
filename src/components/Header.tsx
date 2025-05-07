@@ -23,10 +23,12 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
-          <h1 className="text-2xl font-bold">
-            <span className="text-haive-orange">Hai</span>
-            <span className="text-white">VE</span>
-          </h1>
+          {/* Replace text logo with image logo */}
+          <img 
+            src="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" 
+            alt="HaiVE Logo" 
+            className="h-8 w-auto"
+          />
         </div>
 
         {/* Desktop Navigation */}
