@@ -30,15 +30,15 @@ const CollapsibleContent = ({
         onClick={toggleOpen}
         className={cn(
           'flex items-center justify-between p-4 cursor-pointer rounded-md transition-all duration-200',
-          'border border-haive-teal/30 hover:border-haive-teal',
+          'border border-haive-orange/30 hover:border-haive-orange',
           summaryClassName
         )}
       >
         {summary}
         {isOpen ? (
-          <ChevronUp className="text-haive-teal h-5 w-5" />
+          <ChevronUp className="text-haive-orange h-5 w-5" />
         ) : (
-          <ChevronDown className="text-haive-teal h-5 w-5" />
+          <ChevronDown className="text-haive-orange h-5 w-5" />
         )}
       </div>
       {isOpen && (

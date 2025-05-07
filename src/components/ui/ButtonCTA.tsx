@@ -24,8 +24,8 @@ const ButtonCTA = ({
       className={cn(
         'rounded-md font-medium transition-all duration-200',
         variant === 'primary' ? 
-          'bg-gradient-to-r from-haive-teal to-haive-teal-light text-black hover:shadow-lg hover:shadow-haive-teal/20' : 
-          'bg-transparent border-2 border-haive-teal text-haive-teal hover:bg-haive-teal/10',
+          'bg-gradient-to-r from-haive-orange to-haive-orange-light text-white hover:shadow-lg hover:shadow-haive-orange/20' : 
+          'bg-transparent border-2 border-haive-orange text-haive-orange hover:bg-haive-orange/10',
         size === 'lg' ? 'text-lg py-6 px-8' : 'text-base py-2 px-4',
         className
       )}

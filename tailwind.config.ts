@@ -65,10 +65,10 @@ export default {
 				},
 				// HaiVE custom colors
 				haive: {
-					teal: "#00E5C9",
-					"teal-light": "#4FD1C5",
-					dark: "#151718",
-					"dark-purple": "#1A1F2C",
+					orange: "#F97316",
+					"orange-light": "#FB923C",
+					dark: "#000000",
+					"dark-purple": "#121212",
 					"dark-gray": "#222222",
 				}
 			},
