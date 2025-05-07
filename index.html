@@ -16,7 +16,14 @@
   <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
   <link rel="icon" href="/lovable-uploads/4c9c5130-a848-44f5-a1a6-d621b3c0dfb0.png" type="image/png"/>
   <style>
-    body, #root, main, section, header, footer { position: relative !important; z-index: 1 !important; overflow-x: hidden !important; }
+    html, body { 
+      height: 100%; 
+      overflow-y: auto !important; 
+    }
+    body, #root { 
+      min-height: 100%;
+      position: relative; 
+    }
     .haive-widget, .haive-widget *, .haive-widget + div, .haive-widget + iframe {
       position: fixed !important;
       right: 20px !important;
@@ -46,7 +53,7 @@
     }
   </style>
 </head>
-<body class="overflow-auto">
+<body>
   <div id="root"></div>
   
   <!-- HaiVE Widget Script - Placed before other scripts to ensure proper loading -->
