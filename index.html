@@ -22,28 +22,46 @@
     
     <!-- Custom styles for HaiVE widget -->
     <style>
-      /* This ensures the HaiVE chat widget stays fixed at the bottom right */
-      .haive-widget {
+      /* Global override for HaiVE widget to ensure it's always fixed */
+      .haive-widget,
+      .haive-widget *,
+      .haive-widget > *,
+      .haive-widget > * > * {
         position: fixed !important;
-        bottom: 20px !important;
-        right: 20px !important;
         z-index: 9999 !important;
       }
       
-      /* Target the chat button specifically */
-      .haive-widget button {
-        position: fixed !important;
+      /* Chat button positioning */
+      .haive-widget button,
+      .haive-widget [role="button"],
+      .haive-widget > div:last-child:not(:first-child) {
         bottom: 20px !important;
         right: 20px !important;
-        z-index: 9999 !important;
+        margin: 0 !important;
       }
       
-      /* Target the chat container when opened */
-      .haive-widget > div:not(button) {
-        position: fixed !important;
+      /* Chat container when opened */
+      .haive-widget > div:not([role="button"]):not(button),
+      .haive-widget iframe,
+      .haive-widget > div:first-child:not(:last-child) {
         bottom: 90px !important;
         right: 20px !important;
-        z-index: 9999 !important;
+        max-height: 70vh !important; /* Ensure it doesn't get too tall on small screens */
+        max-width: 90vw !important; /* Responsive width */
+        min-width: 300px !important; /* Minimum width */
+        box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16) !important; /* Nice shadow for depth */
+        border-radius: 16px !important; /* Rounded corners */
+        overflow: hidden !important; /* Keep content within bounds */
+      }
+      
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        .haive-widget > div:not([role="button"]):not(button),
+        .haive-widget iframe,
+        .haive-widget > div:first-child:not(:last-child) {
+          max-width: 85vw !important;
+          max-height: 60vh !important;
+        }
       }
     </style>
   </head>
