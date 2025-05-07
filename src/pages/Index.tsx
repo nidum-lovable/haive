@@ -13,16 +13,41 @@ import HowItWorksSection from '@/components/HowItWorksSection';
 const Index = () => {
   // Effect to ensure the widget is properly initialized and visible
   useEffect(() => {
-    // Add a small delay to make sure the widget loads correctly
-    const timer = setTimeout(() => {
+    // First pass - initialize widget visibility
+    const initializeWidget = () => {
       const widgetElement = document.querySelector('[data-haive-widget]');
       if (widgetElement) {
-        // Ensure the widget is visible
-        widgetElement.setAttribute('style', 'opacity: 1 !important; visibility: visible !important; z-index: 9999 !important; position: fixed !important; bottom: 20px !important; right: 20px !important;');
+        // Force widget to be visible
+        widgetElement.setAttribute('style', 'opacity: 1 !important; visibility: visible !important; z-index: 99999 !important; position: fixed !important; bottom: 20px !important; right: 20px !important;');
+        
+        // Make sure the iframe is visible too
+        const iframe = widgetElement.querySelector('iframe');
+        if (iframe) {
+          iframe.setAttribute('style', 'opacity: 1 !important; visibility: visible !important; z-index: 99999 !important;');
+        }
       }
-    }, 1000);
+    };
 
-    return () => clearTimeout(timer);
+    // Initial setup
+    initializeWidget();
+
+    // Setup a periodic check to ensure widget stays visible
+    const widgetVisibilityCheck = setInterval(() => {
+      initializeWidget();
+    }, 2000);
+
+    // Also check on scroll events
+    const handleScroll = () => {
+      initializeWidget();
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup
+    return () => {
+      clearInterval(widgetVisibilityCheck);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -58,10 +83,10 @@ const Index = () => {
         <IntegrationsSection />
         <FAQsSection />
         <ContactSection />
+        
+        {/* Extra space at the bottom to ensure nothing covers the widget */}
+        <div className="end-spacer"></div>
       </main>
-      
-      {/* Empty div to ensure proper bottom spacing */}
-      <div className="h-24"></div>
     </div>
   );
 };
