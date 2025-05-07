@@ -3,19 +3,29 @@ import React from 'react';
 
 const pressItems = [
   {
-    publication: "TechCrunch",
-    quote: "HaiVE is revolutionizing on-premise AI deployment with their innovative approach to voice agents.",
-    logo: "/lovable-uploads/1a8638bb-360e-4eb9-8ba9-083d2420d116.png"
+    publication: "INDIai",
+    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
+    position: "top-left"
   },
   {
-    publication: "Forbes",
-    quote: "One of the most promising AI startups focusing on enterprise data sovereignty and security.",
-    logo: "/lovable-uploads/328e991c-71f4-44d3-b8b5-dba1d03dbde7.png"
+    publication: "The Hindu",
+    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
+    position: "top-center"
   },
   {
-    publication: "The Wall Street Journal",
-    quote: "HaiVE's cost-effective AI solution is making waves in customer service automation.",
-    logo: "/lovable-uploads/3958f6fb-cf21-45c1-b313-bf3b035d9387.png"
+    publication: "Financial Express",
+    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
+    position: "top-right"
+  },
+  {
+    publication: "AIM",
+    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
+    position: "bottom-left"
+  },
+  {
+    publication: "Outlook Start-Up",
+    logo: "/lovable-uploads/0db5f464-24d4-490b-b028-e85eaa2007f3.png",
+    position: "bottom-right"
   }
 ];
 
@@ -23,27 +33,38 @@ const InThePressSection = () => {
   return (
     <section className="py-[5%] bg-black" id="press">
       <div className="container mx-auto px-4">
-        <h2 className="section-heading text-center">In the Press</h2>
+        <h2 className="text-5xl md:text-6xl font-bold mb-20 text-white text-center">
+          In the Press
+        </h2>
         
-        <div className="max-w-5xl mx-auto mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pressItems.map((item, index) => (
-              <div 
-                key={index}
-                className="p-6 rounded-lg bg-haive-dark-gray border border-gray-800 hover:border-haive-teal/30 transition-all duration-300"
-              >
-                <div className="h-16 mb-4 flex items-center">
-                  <img 
-                    src={item.logo} 
-                    alt={item.publication} 
-                    className="max-h-full max-w-[180px] object-contain"
-                  />
-                </div>
-                <p className="text-gray-300 italic mb-3">"{item.quote}"</p>
-                <p className="text-sm text-haive-teal">— {item.publication}</p>
-              </div>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
+          {pressItems.slice(0, 3).map((item, index) => (
+            <div 
+              key={index}
+              className="flex justify-center items-center"
+            >
+              <img 
+                src={item.logo} 
+                alt={item.publication}
+                className="max-h-20 max-w-full object-contain" 
+              />
+            </div>
+          ))}
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {pressItems.slice(3).map((item, index) => (
+            <div 
+              key={index}
+              className="flex justify-center items-center"
+            >
+              <img 
+                src={item.logo} 
+                alt={item.publication}
+                className="max-h-20 max-w-full object-contain" 
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
