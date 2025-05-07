@@ -8,6 +8,8 @@ import PricingSection from '@/components/PricingSection';
 import WhyHaiveSection from '@/components/WhyHaiveSection';
 import WhyOnPremiseAISection from '@/components/WhyOnPremiseAISection';
 import TechBadgesSection from '@/components/TechBadgesSection';
+import TeamSection from '@/components/TeamSection';
+import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
 // Create public/images directory for assets
@@ -37,6 +39,8 @@ const Index = () => {
         <PricingSection />
         <WhyHaiveSection />
         <TechBadgesSection />
+        <TeamSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>
