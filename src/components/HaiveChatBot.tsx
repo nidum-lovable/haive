@@ -17,17 +17,13 @@ const HaiVEChatbot = () => {
       script.src = 'https://widget.haive.tech/widget.iife.js';
       script.async = true;
       
-      // Set required attributes
-      script.setAttribute('data-id', 'e0cba082-be1e-4d12-88d9-b1f3c3eeafba_95e6c2e7-2909-46cb-bd02-48109a7ae785');
-      script.setAttribute('data-phone_number', '17252390568');
-      script.setAttribute('data-assistant_name', 'Sara');
-      script.setAttribute('data-container', 'haive-widget-container');
+      // Set required attributes with new data
+      script.setAttribute('data-id', '4f8cbfe7-9e96-4f3b-912c-17e96f490fd8_0bb2b0f3-dbdb-46bd-bee1-904ebcad0faf');
+      script.setAttribute('data-phone_number', 'OpnY8jad0mdLrnHm');
+      script.setAttribute('data-assistant_name', 'Samantha');
       
-      // Add to container
-      const container = document.getElementById('haive-widget-container');
-      if (container) {
-        container.appendChild(script);
-      }
+      // Add to document head or body
+      document.head.appendChild(script);
     };
 
     // Function to ensure all elements are clickable
@@ -39,13 +35,6 @@ const HaiVEChatbot = () => {
         }
       });
       
-      // Special handling for widget container
-      const widgetContainer = document.getElementById('haive-widget-container');
-      if (widgetContainer) {
-        // Add specific styles to ensure widget works
-        widgetContainer.style.pointerEvents = 'auto';
-      }
-
       // Ensure all buttons, links, and inputs are clickable
       const clickableElements = document.querySelectorAll('button, a, input, select, textarea, [role="button"]');
       clickableElements.forEach(element => {
